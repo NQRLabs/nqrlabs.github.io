@@ -55,6 +55,60 @@
     nav a:hover {
       color: #00ffaa;
     }
+
+    /* Neon shimmer for header nav links */
+    header nav a {
+      position: relative;
+      display: inline-block;
+      overflow: hidden;             /* hide the animated underline overflow */
+      text-shadow: 0 0 0 rgba(0, 255, 170, 0);  /* no glow at rest */
+    }
+    
+    /* animated underline "edge" */
+    header nav a::after {
+      content: "";
+      position: absolute;
+      left: -120%;
+      bottom: -2px;
+      width: 120%;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(0,255,170,0) 0%, rgba(0,255,170,0.9) 35%, rgba(93,225,255,0.9) 65%, rgba(0,255,170,0) 100%);
+      opacity: 0;
+      transform: translateZ(0);
+    }
+    
+    @keyframes nqrShimmer {
+      0%   { left: -120%; opacity: 0; }
+      10%  { opacity: 1; }
+      50%  { left: 0%; }
+      90%  { opacity: 1; }
+      100% { left: 120%; opacity: 0; }
+    }
+    
+    /* hover state: gentle glow + shimmering edge sweep */
+    header nav a:hover,
+    header nav a:focus-visible {
+      color: #00ffaa; /* you already shift to green; keeps brand consistent */
+      text-shadow:
+        0 0 6px rgba(0,255,170,0.35),
+        0 0 14px rgba(93,225,255,0.25);
+    }
+    
+    header nav a:hover::after,
+    header nav a:focus-visible::after {
+      animation: nqrShimmer 1.2s ease-out forwards;
+    }
+    
+    /* respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      header nav a::after { display: none; }
+      header nav a,
+      header nav a:hover,
+      header nav a:focus-visible {
+        transition: none !important;
+        text-shadow: none !important;
+      }
+    }
     .hero {
       text-align: center;
       padding: 100px 20px;
@@ -118,6 +172,7 @@
       padding: 25px;
       text-align: center;
       transition: 0.25s;
+      cursor: pointer;
     }
     .card:hover {
       transform: translateY(-6px);
@@ -166,6 +221,47 @@
     footer a:hover {
       color: #00ffaa;
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+    
+    /* common fade and slide reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* card polish */
+    .card {
+      background-color: #0c1318;
+      border: 1px solid rgba(0,255,170,0.15);
+      border-radius: 10px;
+      padding: 25px;
+      text-align: center;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+    
+    .card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: #5de1ff;
+      box-shadow: 0 8px 20px rgba(0,255,170,0.1);
+    }
+    
+    /* pulse for CTA button */
+    .cta-btn:hover {
+      background: #00bb88;
+      transform: translateY(-2px) scale(1.03);
+    }
   </style>
 </head>
 
@@ -188,7 +284,7 @@
 </section>
 
 <!-- New Player Section -->
-<section id="start-here">
+<section id="start-here" class="reveal">
   <h2 class="section-title">New Player? Start Here</h2>
   <p class="section-sub">Discover hidden layers and sharpen your instincts.</p>
   <div class="grid">
@@ -226,7 +322,7 @@
 </section>
 
 <!-- Creator Tools -->
-<section id="creator-tools">
+<section id="creator-tools" class="reveal">
   <h2 class="section-title">Creator Tools</h2>
   <p class="section-sub">Hide meaning. Build mysteries. Shape the experience.</p>
   <div class="grid">
@@ -254,7 +350,7 @@
 </section>
 
 <!-- Analyst & Experimental Tools -->
-<section id="analyst-tools">
+<section id="analyst-tools" class="reveal">
   <h2 class="section-title">Analyst and Sandbox Tools</h2>
   <p class="section-sub">Explore new mechanics. Decode the unknown. Experiment freely.</p>
   <div class="grid">
@@ -276,7 +372,13 @@
   </div>
 </section>
 
-<section class="about">
+<section id="latest-updates" class="reveal">
+  <h2 class="section-title">Latest Updates</h2>
+  <p class="section-sub">Recent GitHub activity from NQR Labs</p>
+  <div id="updates-container" class="grid"></div>
+</section>
+
+<section class="about" class="reveal">
   This is where puzzle solvers and puzzle builders meet. Join the CLU community to collaborate on stories, ciphers, hidden signals, and new ways to reveal what should never be obvious at first glance. Learn. Create. Test ideas. Share discoveries. The rabbit holes go deeper when we explore them together.
 </section>
 
@@ -288,7 +390,127 @@
 </footer>
 
 <script>
+  function revealOnScroll() {
+    const reveals = document.querySelectorAll('.reveal');
+    const viewport = window.innerHeight;
+    reveals.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < viewport - 50) {
+        el.classList.add('visible');
+      }
+    });
+  }
+  
+  window.addEventListener('scroll', revealOnScroll);
+  window.addEventListener('load', revealOnScroll);
+
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  
+  async function loadLatestUpdates() {
+    const container = document.getElementById('updates-container');
+    const username = 'NQRLabs';
+    const maxItems = 4; // change to 3 or 5 if you prefer
+  
+    try {
+      const res = await fetch(`https://api.github.com/users/${username}/repos?sort=updated`);
+      const repos = await res.json();
+  
+      // Filter out forks and very small placeholder repos if desired
+      const real = repos.filter(r => !r.fork);
+  
+      // Truncate to only a few
+      const latest = real.slice(0, maxItems);
+  
+      // Render each card
+      container.innerHTML = '';
+      latest.forEach(repo => {
+        const card = document.createElement('div');
+        card.className = 'card reveal';
+        const updated = new Date(repo.updated_at).toLocaleDateString();
+        card.innerHTML = `
+          <h3>${repo.name}</h3>
+          <p>Last updated: ${updated}</p>
+          <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">View Repo</a>
+        `;
+        container.appendChild(card);
+      });
+    } catch (e) {
+      container.innerHTML = '<p>Unable to load updates right now.</p>';
+    }
+  }
+  
+  loadLatestUpdates();
+
+  /* Upgrade cards so the whole card acts like its primary link */
+  function enableCardClicks(scope) {
+    var root = scope || document;
+    var cards = root.querySelectorAll('.card');
+  
+    cards.forEach(function(card){
+      // Avoid double-binding if called more than once
+      if (card.dataset.clickBound === '1') return;
+  
+      var link = card.querySelector('a[href]');
+      if (!link) return;
+  
+      // Accessibility
+      card.setAttribute('role', 'link');
+      card.setAttribute('tabindex', '0');
+      var h3 = card.querySelector('h3');
+      if (h3 && !card.getAttribute('aria-label')) {
+        card.setAttribute('aria-label', h3.textContent.trim());
+      }
+  
+      function activate() {
+        var href = link.getAttribute('href');
+        var target = (link.getAttribute('target') || '').toLowerCase();
+  
+        // Use window.open for _blank to avoid popup blockers on programmatic .click()
+        if (target === '_blank') {
+          window.open(href, '_blank', 'noopener,noreferrer');
+        } else {
+          window.location.href = href;
+        }
+      }
+  
+      // Click anywhere on the card unless the user clicked a native interactive element
+      card.addEventListener('click', function(e){
+        if (e.target.closest('a, button, input, textarea, select')) return;
+        activate();
+      });
+  
+      // Keyboard: Enter / Space
+      card.addEventListener('keydown', function(e){
+        var key = e.key || e.code;
+        if (key === 'Enter' || key === ' ') {
+          e.preventDefault();
+          activate();
+        }
+      });
+  
+      card.dataset.clickBound = '1';
+    });
+  }
+  
+  // Run once on initial content
+  enableCardClicks(document);
+  
+  // Re-run after Latest Updates are injected
+  if (typeof loadLatestUpdates === 'function') {
+    // Monkey-patch the loader to call our enhancer when it finishes
+    (async function(){
+      try {
+        await loadLatestUpdates();
+      } catch (err) {
+        // ignore; the section will just stay empty
+      } finally {
+        var updates = document.getElementById('updates-container');
+        if (updates) enableCardClicks(updates);
+      }
+    })();
+  }
+
 </script>
 
 </body>
