@@ -3,35 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Light/dark aware theme colors (Chrome, Android, Windows tiles) -->
+  <meta name="description" content="Tools for puzzle solvers and ARG creators in the CLU community. Explore mysteries, build interactive stories, and unlock hidden layers.">
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#0b1220">
-  <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#04070a">
-  <!-- Open Graph -->
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#04070a">
+
   <meta property="og:title" content="NQR Labs">
-  <meta property="og:description" content="Experiments and tools exploring audio, sensing, and computation.">
+  <meta property="og:description" content="Tools for puzzle solvers and ARG creators in the CLU community.">
   <meta property="og:image" content="https://projects.nqrlabs.com/assets/images/android-chrome-512x512.png">
   <meta property="og:url" content="https://projects.nqrlabs.com/">
   <meta property="og:type" content="website">
-  
-  <!-- Twitter (X) -->
-  <meta name="twitter:card" content="summary">
+
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="NQR Labs">
-  <meta name="twitter:description" content="Experiments and tools exploring audio, sensing, and computation.">
+  <meta name="twitter:description" content="Tools for puzzle solvers and ARG creators in the CLU community.">
   <meta name="twitter:image" content="https://projects.nqrlabs.com/assets/images/android-chrome-512x512.png">
+
   <title>NQR Labs Projects</title>
-  <!-- Primary favicons -->
+
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
-  
-  <!-- Apple touch icon (iOS home screen) -->
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon-180x180.png">
-  
-  <!-- Android/Chrome icons (PWAs and higher-res favicon fallbacks) -->
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/android-chrome-192x192.png">
   <link rel="icon" type="image/png" sizes="512x512" href="/assets/images/android-chrome-512x512.png">
-  
-  <!-- Legacy shortcut icon fallback -->
   <link rel="shortcut icon" href="/assets/images/favicon-32x32.png">
+
   <style>
     body {
       margin: 0;
@@ -40,7 +35,6 @@
       color: #d7e8ff;
       line-height: 1.6;
     }
-
     header {
       display: flex;
       align-items: center;
@@ -48,11 +42,9 @@
       padding: 20px 40px;
       border-bottom: 1px solid rgba(0,255,170,0.15);
     }
-
     header img {
       height: 48px;
     }
-
     nav a {
       margin-left: 20px;
       color: #5de1ff;
@@ -60,30 +52,30 @@
       font-weight: bold;
       transition: 0.2s ease-in-out;
     }
-
     nav a:hover {
       color: #00ffaa;
     }
-
     .hero {
       text-align: center;
       padding: 100px 20px;
       background: linear-gradient(135deg, #00111a, #000000);
     }
-
     .hero h1 {
       font-size: 3rem;
       margin: 0;
       color: #5de1ff;
     }
-
+    .hero h2 {
+      color: #00ffaa;
+      font-size: 1.4rem;
+      margin-top: 10px;
+    }
     .hero p {
       max-width: 700px;
       margin: 20px auto;
       font-size: 1.2rem;
       color: #97f3d2;
     }
-
     .cta-btn {
       display: inline-block;
       margin-top: 30px;
@@ -97,26 +89,28 @@
       text-decoration: none;
       transition: 0.25s;
     }
-
     .cta-btn:hover {
       background: #00bb88;
       transform: translateY(-2px);
     }
-
     .section-title {
       text-align: center;
-      margin: 80px 0 30px;
+      margin: 80px 0 20px;
       font-size: 2rem;
       color: #5de1ff;
     }
-
+    .section-sub {
+      text-align: center;
+      margin: 0 0 40px;
+      font-size: 1rem;
+      color: #97f3d2;
+    }
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 30px;
       padding: 0 40px 80px;
     }
-
     .card {
       background-color: #0c1318;
       border: 1px solid rgba(0,255,170,0.15);
@@ -125,23 +119,19 @@
       text-align: center;
       transition: 0.25s;
     }
-
     .card:hover {
       transform: translateY(-6px);
       border-color: #5de1ff;
     }
-
     .card h3 {
       margin: 10px 0;
       color: #5de1ff;
     }
-
     .card p {
       font-size: 0.95rem;
       color: #b9ebd8;
       min-height: 48px;
     }
-
     .card a {
       display: inline-block;
       margin-top: 10px;
@@ -150,11 +140,9 @@
       font-weight: bold;
       transition: 0.2s;
     }
-
     .card a:hover {
       color: #5de1ff;
     }
-
     .about {
       max-width: 900px;
       margin: 0 auto 100px;
@@ -163,7 +151,6 @@
       text-align: center;
       color: #97f3d2;
     }
-
     footer {
       text-align: center;
       padding: 30px;
@@ -171,13 +158,11 @@
       border-top: 1px solid rgba(0,255,170,0.15);
       color: #4da8a1;
     }
-
     footer a {
       color: #5de1ff;
       margin: 0 10px;
       text-decoration: none;
     }
-
     footer a:hover {
       color: #00ffaa;
     }
@@ -197,34 +182,87 @@
 
 <section class="hero">
   <h1>NQR Labs</h1>
-  <p>Experiments and tools exploring audio, sensing, and the unseen layers of computation. The CLU community helps push boundaries and bring new capabilities to life.</p>
-  <a class="cta-btn" href="#projects">Explore Projects</a>
+  <h2>Where puzzles evolve, and mysteries are engineered</h2>
+  <p>Build your skills, create new challenges, and reveal what hides beneath the surface. The CLU community hunts secrets together, experiments with story and signal, and pushes the craft of interactive mysteries forward.</p>
+  <a class="cta-btn" href="#start-here">Choose Your Path</a>
 </section>
 
-<h2 id="projects" class="section-title">Featured Projects</h2>
-
-<div class="grid">
-  <div class="card">
-    <h3>SpectroGhost</h3>
-    <p>Real-time spectral visualization inspired by psychoacoustic perception.</p>
-    <a href="/SpectroGhost/">View Project</a>
+<!-- New Player Section -->
+<section id="start-here">
+  <h2 class="section-title">New Player? Start Here</h2>
+  <p class="section-sub">Discover hidden layers and sharpen your instincts.</p>
+  <div class="grid">
+    <div class="card">
+      <h3>Wordflux</h3>
+      <p>Practice word pattern recognition and deduction with fast feedback.</p>
+      <a href="/Wordflux/">Launch</a>
+    </div>
+    <div class="card">
+      <h3>SpectroGhost</h3>
+      <p>Hunt secret messages inside sound with real-time spectrogram exploration.</p>
+      <a href="/SpectroGhost/">Launch</a>
+    </div>
+    <div class="card">
+      <h3>GlyphGrid</h3>
+      <p>Crack cryptograms with intelligent mapping and visual letter tracking.</p>
+      <a href="/GlyphGrid/">Launch</a>
+    </div>
   </div>
+</section>
 
-  <div class="card">
-    <h3>ReSounder</h3>
-    <p>Interactive acoustic experimentation and signal shaping built for discovery.</p>
-    <a href="/ReSounder/">View Project</a>
+<!-- Creator Tools -->
+<section id="creator-tools">
+  <h2 class="section-title">Creator Tools</h2>
+  <p class="section-sub">Hide meaning. Build mysteries. Shape the experience.</p>
+  <div class="grid">
+    <div class="card">
+      <h3>WordLoom</h3>
+      <p>Weave crosswords quickly for puzzle prototyping and clue delivery.</p>
+      <a href="/WordLoom/">Launch</a>
+    </div>
+    <div class="card">
+      <h3>Carbbels</h3>
+      <p>Experiment with anagram layouts and spatial letter reasoning.</p>
+      <a href="/Carbbels/">Launch</a>
+    </div>
+    <div class="card">
+      <h3>Ghostmark</h3>
+      <p>Hide a secret image inside another using seeded steganography.</p>
+      <a href="/Ghostmark/">Launch</a>
+    </div>
+    <div class="card">
+      <h3>SonoGlyph</h3>
+      <p>Embed visual art into audio spectrums using spectral synthesis.</p>
+      <a href="/SonoGlyph/">Launch</a>
+    </div>
+    <div class="card">
+      <h3>ReSounder</h3>
+      <p>Rebuild audio from spectrograms to test hidden sound puzzles.</p>
+      <a href="/ReSounder/">Launch</a>
+    </div>
   </div>
+</section>
 
-  <div class="card">
-    <h3>Upcoming Project</h3>
-    <p>A new experiment is currently brewing inside the lab.</p>
-    <span style="opacity:0.7;">Coming Soon</span>
+<!-- Analyst & Experimental Tools -->
+<section id="analyst-tools">
+  <h2 class="section-title">Analyst and Sandbox Tools</h2>
+  <p class="section-sub">Explore new mechanics. Decode the unknown. Experiment freely.</p>
+  <div class="grid">
+    <div class="card">
+      <h3>SpectroGhost</h3>
+      <p>A fast signal investigation app for deep audio sleuthing.</p>
+      <a href="/SpectroGhost/">Launch</a>
+    </div>
+    <div class="card">
+      <h3>ReSounder</h3>
+      <p>Understand and exploit the link between images and audio.</p>
+      <a href="/ReSounder/">Launch</a>
+    </div>
   </div>
-</div>
+</section>
 
 <section class="about">
-  NQR Labs is a playground of signal, light, and computation. Every project begins as curiosity and evolves through iteration, experimentation, and contributions from the CLU community. The work here lives at the intersection of creativity and engineering, where the unseen becomes visible and the unheard becomes tangible.
+  This is where puzzle solvers and puzzle builders meet. Join the CLU community to collaborate on stories, ciphers, hidden signals, and new ways to reveal what should never be obvious at first glance. Learn. Create. Test ideas. Share discoveries. The rabbit holes go deeper when we explore them together.
 </section>
 
 <footer>
@@ -233,8 +271,8 @@
   <a href="https://www.youtube.com/@CLU-NQR" target="_blank">YouTube</a>
   <a href="https://discord.gg/HT9YE8rvuN" target="_blank">Discord</a>
 </footer>
+
 <script>
-  // ASCII-only; injects the current year
   document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 
