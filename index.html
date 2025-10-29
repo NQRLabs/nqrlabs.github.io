@@ -1,10 +1,242 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Welcome to NQR Labs</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Light/dark aware theme colors (Chrome, Android, Windows tiles) -->
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#0b1220">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#04070a">
+  <!-- Open Graph -->
+  <meta property="og:title" content="NQR Labs">
+  <meta property="og:description" content="Experiments and tools exploring audio, sensing, and computation.">
+  <meta property="og:image" content="https://projects.nqrlabs.com/assets/images/android-chrome-512x512.png">
+  <meta property="og:url" content="https://projects.nqrlabs.com/">
+  <meta property="og:type" content="website">
+  
+  <!-- Twitter (X) -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="NQR Labs">
+  <meta name="twitter:description" content="Experiments and tools exploring audio, sensing, and computation.">
+  <meta name="twitter:image" content="https://projects.nqrlabs.com/assets/images/android-chrome-512x512.png">
+  <title>NQR Labs Projects</title>
+  <!-- Primary favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+  
+  <!-- Apple touch icon (iOS home screen) -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon-180x180.png">
+  
+  <!-- Android/Chrome icons (PWAs and higher-res favicon fallbacks) -->
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/images/android-chrome-512x512.png">
+  
+  <!-- Legacy shortcut icon fallback -->
+  <link rel="shortcut icon" href="/assets/images/favicon-32x32.png">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #04070a;
+      color: #d7e8ff;
+      line-height: 1.6;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 40px;
+      border-bottom: 1px solid rgba(0,255,170,0.15);
+    }
+
+    header img {
+      height: 48px;
+    }
+
+    nav a {
+      margin-left: 20px;
+      color: #5de1ff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.2s ease-in-out;
+    }
+
+    nav a:hover {
+      color: #00ffaa;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 100px 20px;
+      background: linear-gradient(135deg, #00111a, #000000);
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin: 0;
+      color: #5de1ff;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: 20px auto;
+      font-size: 1.2rem;
+      color: #97f3d2;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 14px 34px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 6px;
+      background: #0077ff;
+      color: #fff;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.25s;
+    }
+
+    .cta-btn:hover {
+      background: #00bb88;
+      transform: translateY(-2px);
+    }
+
+    .section-title {
+      text-align: center;
+      margin: 80px 0 30px;
+      font-size: 2rem;
+      color: #5de1ff;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+      padding: 0 40px 80px;
+    }
+
+    .card {
+      background-color: #0c1318;
+      border: 1px solid rgba(0,255,170,0.15);
+      border-radius: 10px;
+      padding: 25px;
+      text-align: center;
+      transition: 0.25s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: #5de1ff;
+    }
+
+    .card h3 {
+      margin: 10px 0;
+      color: #5de1ff;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #b9ebd8;
+      min-height: 48px;
+    }
+
+    .card a {
+      display: inline-block;
+      margin-top: 10px;
+      color: #00ffaa;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    .card a:hover {
+      color: #5de1ff;
+    }
+
+    .about {
+      max-width: 900px;
+      margin: 0 auto 100px;
+      font-size: 1.1rem;
+      padding: 0 20px;
+      text-align: center;
+      color: #97f3d2;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(0,255,170,0.15);
+      color: #4da8a1;
+    }
+
+    footer a {
+      color: #5de1ff;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: #00ffaa;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>NQR Labs Projects</h1>
-  <p>This is the main site for NQR Labs GitHub-hosted projects.</p>
+
+<header>
+  <img src="./assets/images/logo.png" alt="NQR Labs Logo">
+  <nav>
+    <a href="https://github.com/NQRLabs" target="_blank">GitHub</a>
+    <a href="https://www.youtube.com/@CLU-NQR" target="_blank">YouTube</a>
+    <a href="https://discord.gg/HT9YE8rvuN" target="_blank">Discord</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>NQR Labs</h1>
+  <p>Experiments and tools exploring audio, sensing, and the unseen layers of computation. The CLU community helps push boundaries and bring new capabilities to life.</p>
+  <a class="cta-btn" href="#projects">Explore Projects</a>
+</section>
+
+<h2 id="projects" class="section-title">Featured Projects</h2>
+
+<div class="grid">
+  <div class="card">
+    <h3>SpectroGhost</h3>
+    <p>Real-time spectral visualization inspired by psychoacoustic perception.</p>
+    <a href="/SpectroGhost/">View Project</a>
+  </div>
+
+  <div class="card">
+    <h3>ReSounder</h3>
+    <p>Interactive acoustic experimentation and signal shaping built for discovery.</p>
+    <a href="/ReSounder/">View Project</a>
+  </div>
+
+  <div class="card">
+    <h3>Upcoming Project</h3>
+    <p>A new experiment is currently brewing inside the lab.</p>
+    <span style="opacity:0.7;">Coming Soon</span>
+  </div>
+</div>
+
+<section class="about">
+  NQR Labs is a playground of signal, light, and computation. Every project begins as curiosity and evolves through iteration, experimentation, and contributions from the CLU community. The work here lives at the intersection of creativity and engineering, where the unseen becomes visible and the unheard becomes tangible.
+</section>
+
+<footer>
+  <span>Copyright (c) <span id="year"></span> NQR Labs</span>
+  <a href="https://github.com/NQRLabs" target="_blank">GitHub</a>
+  <a href="https://www.youtube.com/@CLU-NQR" target="_blank">YouTube</a>
+  <a href="https://discord.gg/HT9YE8rvuN" target="_blank">Discord</a>
+</footer>
+<script>
+  // ASCII-only; injects the current year
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
 </body>
 </html>
