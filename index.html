@@ -594,12 +594,12 @@
 
 <!-- Main Content (cards view) -->
 <div id="main-content">
-  <header>
+  <header id="nav-home">
     <img src="./assets/images/logo.png" alt="NQR Labs Logo">
     <nav>
-      <a href="https://github.com/NQRLabs" target="_blank">GitHub</a>
       <a href="https://www.youtube.com/@CLU-NQR" target="_blank">YouTube</a>
       <a href="https://discord.gg/HT9YE8rvuN" target="_blank">Discord</a>
+      <a href="https://github.com/NQRLabs" target="_blank">GitHub</a>
     </nav>
   </header>
 
@@ -628,6 +628,11 @@
         <h3>GlyphGrid</h3>
         <p>Crack cryptograms with intelligent mapping and visual letter tracking.</p>
         <a href="/GlyphGrid/" class="card-link-visually-hidden">Launch</a>
+      </div>
+      <div class="card has-bg" style="--bg: url('./assets/images/Ghostmark_card.png')" data-internal-link="/Ghostmark/">
+        <h3>Ghostmark</h3>
+        <p>Uncover images inside another hidden with Ghostmark.</p>
+        <a href="/Ghostmark/" class="card-link-visually-hidden">Launch</a>
       </div>
       <div class="card has-bg" style="--bg: url('./assets/images/Carbbels_card.png')" data-internal-link="/Carbbels/">
         <h3>Carbbels</h3>
@@ -723,9 +728,9 @@
 
   <footer>
     <span>Copyright (c) <span id="year"></span> NQR Labs</span>
-    <a href="https://github.com/NQRLabs" target="_blank">GitHub</a>
     <a href="https://www.youtube.com/@CLU-NQR" target="_blank">YouTube</a>
     <a href="https://discord.gg/HT9YE8rvuN" target="_blank">Discord</a>
+    <a href="https://github.com/NQRLabs" target="_blank">GitHub</a>
   </footer>
 </div>
 
@@ -743,8 +748,8 @@
   
   <div class="nav-section">
     <div class="nav-section-title">Main</div>
-    <a href="#" class="nav-link primary" id="nav-home">Home</a>
-    <a href="#" class="nav-link" id="nav-about">About NQR</a>
+    <a href="#" class="nav-link" data-scroll-to="nav-home">Home</a>
+    <a href="#" class="nav-link" id="nav-about">About NQR Labs</a>
     <a href="#" class="nav-link" id="nav-help">Help & Tips</a>
   </div>
   
@@ -753,15 +758,15 @@
     <a href="#" class="nav-link" data-scroll-to="player-tools">Player Tools</a>
     <a href="#" class="nav-link" data-scroll-to="creator-tools">Creator Tools</a>
     <a href="#" class="nav-link" data-scroll-to="analyst-tools">Analyst Tools</a>
-    <a href="#" class="nav-link" data-scroll-to="zodiac-arg">The Zodiac ARG</a>
-    <a href="#" class="nav-link" data-scroll-to="latest-updates">Latest Updates</a>
+    <a href="#" class="nav-link" data-scroll-to="zodiac-arg">Zodiac ARG</a>
+    <a href="#" class="nav-link" data-scroll-to="latest-updates">Latest GitHub Updates</a>
   </div>
   
   <div class="nav-section">
     <div class="nav-section-title">Connect</div>
-    <a href="https://github.com/NQRLabs" target="_blank" class="nav-link">GitHub</a>
     <a href="https://www.youtube.com/@CLU-NQR" target="_blank" class="nav-link">YouTube</a>
     <a href="https://discord.gg/HT9YE8rvuN" target="_blank" class="nav-link">Discord</a>
+    <a href="https://github.com/NQRLabs" target="_blank" class="nav-link">GitHub</a>
   </div>
 </div>
 
@@ -778,29 +783,24 @@
 <div id="about-modal" class="modal">
   <div class="modal-content">
     <div class="modal-header">
-      <h2 class="modal-title">About NQR</h2>
+      <h2 class="modal-title">About NQR Labs</h2>
       <button class="close-btn" onclick="closeModal('about-modal')">&times;</button>
     </div>
     <div class="modal-body">
       <p><strong>NQR Labs</strong> is the creative workspace of a puzzle designer, ARG creator, and mystery engineer who lives for the thrill of hidden layers and encoded stories.</p>
       
-      <h3>Philosophy</h3>
-      <p>Every puzzle should feel like a discovery, not a chore. The best mysteries respect the solver's intelligence while rewarding persistence, lateral thinking, and collaboration.</p>
+      <h3>Creative Philosophy</h3>
+      <p>Every puzzle should feel like discovering a real rabbit hole hidden in plane sight. The best mysteries respect the solver's intelligence while rewarding persistence, lateral thinking, and collaboration.</p>
       
       <h3>Community</h3>
       <p>These tools are built for the <strong>CLU community</strong>‚Äîa collective of puzzle enthusiasts, ARG hunters, and cipher breakers who believe that the best challenges are solved together.</p>
       
-      <h3>Skills & Interests</h3>
-      <p>
-        <span class="badge">Cryptography</span>
-        <span class="badge">Steganography</span>
-        <span class="badge">Audio Analysis</span>
-        <span class="badge">ARG Design</span>
-        <span class="badge">Interactive Fiction</span>
-        <span class="badge">Puzzle Engineering</span>
-      </p>
+      <h3>What makes an ARG</h3>
+      <p>An Alternate Reality Game (ARG) is essentially puzzle-driven interactive unfiction. These experiences are at their best when a community forms around them - sharing discoveries, solving puzzles collaboratively, and uncovering hidden narratives together. The CLU community thrives on this collective spirit, bringing together both players and creators in a shared creative space. Here, ARG creators can test new ideas, gather live feedback, and refine their worlds, while solvers work side by side with them to unravel mysteries and shape stories as they unfold. Whether the puzzles emerge from within our own ranks or from ARGs found out in the wider web, the hunt is always open, and collaboration is always encouraged.</p>
       
       <h3>Get Involved</h3>
+      <p>Follow on <a href="https://www.youtube.com/@CLU-NQR" target="_blank">YouTube</a> for deep dives into creative tools, ARG walkthroughs, and lessons that lead you further down the rabbit hole.</p>
+
       <p>Join the <a href="https://discord.gg/HT9YE8rvuN" target="_blank">CLU Discord</a> to collaborate on mysteries, share techniques, and participate in community ARGs.</p>
       
       <p>Follow on <a href="https://github.com/NQRLabs" target="_blank">GitHub</a> for open-source puzzle tools and experimental projects.</p>
@@ -816,33 +816,21 @@
       <button class="close-btn" onclick="closeModal('help-modal')">&times;</button>
     </div>
     <div class="modal-body">
-      <h3>üéØ Navigation</h3>
-      <p><strong>Click any card</strong> to launch tools or view content in an embedded viewer. Internal GitHub Pages apps and Notion documents load right here‚Äîno need to leave the page.</p>
-      
-      <p><strong>External links</strong> (like GitHub, YouTube, Discord) open in new tabs normally.</p>
-      
-      <h3>üçî Navigation Menu</h3>
-      <p>Click the <strong>hamburger menu</strong> (‚ò∞) in the top-left corner anytime to access navigation options, return home, or jump to different sections.</p>
-      
-      <h3>üîô Return Home</h3>
-      <p>When viewing content, use the navigation menu and select "Return Home" to get back to the card grid.</p>
-      
-      <h3>üì± Mobile Friendly</h3>
-      <p>All tools and content are responsive and work on mobile devices. The navigation sidebar adapts to smaller screens.</p>
-      
-      <h3>‚ö° Quick Sections</h3>
-      <p>Use the "Jump to Section" links in the navigation sidebar to quickly scroll to different parts of the homepage.</p>
-      
-      <h3>üí° Pro Tips</h3>
+      <h3>Welcome</h3>
+      <p>Think of NQR Labs as a playground for creative exploration - a space where curiosity leads the way. Whether youíre experimenting with new tools, diving into interactive stories, or learning how digital puzzles come together, youíre in good company here.</p>
+    
+      <h3>Collaboration</h3>
+      <p>The most interesting discoveries happen when people share what they find. Discuss ideas, trade insights, and build on each otherís work. This is a community for explorers, makers, and storytellers alike - and youíre invited to take part in shaping it.</p>
+    
+      <h3>Learning & Experimentation</h3>
+      <p>Many of the projects here are works in progress - experiments in storytelling, design, and interaction. Donít be afraid to click around, test things, or remix ideas. Itís all part of the process.</p>
+  
+      <h3>Stay Connected</h3>
       <ul style="text-align: left; padding-left: 20px;">
-        <li>Hold Ctrl/Cmd and click an internal card to open it in a new tab if you prefer</li>
-        <li>Most tools remember your work in browser storage</li>
-        <li>The Zodiac ARG content updates regularly‚Äîcheck back often</li>
-        <li>Join Discord for live collaboration and hints</li>
+        <li>Join the conversation on <a href="https://discord.gg/HT9YE8rvuN" target="_blank">Discord</a>. Share feedback, discuss ideas, or find collaborators.</li>
+        <li>Follow on <a href="https://youtube.com/@CLU-NQR" target="_blank">YouTube</a> for tutorials, experiments, and guided explorations.</li>
+        <li>Report bugs or contribute improvements on <a href="https://github.com/NQRLabs" target="_blank">GitHub</a>.</li>
       </ul>
-      
-      <h3>üêõ Issues?</h3>
-      <p>If something isn't working, try refreshing the page. For persistent problems, report them on <a href="https://github.com/NQRLabs" target="_blank">GitHub</a> or in the Discord.</p>
     </div>
   </div>
 </div>
