@@ -38,7 +38,7 @@
     header {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       padding: 20px 40px;
       border-bottom: 1px solid rgba(0,255,170,0.15);
     }
@@ -60,11 +60,10 @@
     header nav a {
       position: relative;
       display: inline-block;
-      overflow: hidden;             /* hide the animated underline overflow */
-      text-shadow: 0 0 0 rgba(0, 255, 170, 0);  /* no glow at rest */
+      overflow: hidden;
+      text-shadow: 0 0 0 rgba(0, 255, 170, 0);
     }
     
-    /* animated underline "edge" */
     header nav a::after {
       content: "";
       position: absolute;
@@ -85,10 +84,9 @@
       100% { left: 120%; opacity: 0; }
     }
     
-    /* hover state: gentle glow + shimmering edge sweep */
     header nav a:hover,
     header nav a:focus-visible {
-      color: #00ffaa; /* you already shift to green; keeps brand consistent */
+      color: #00ffaa;
       text-shadow:
         0 0 6px rgba(0,255,170,0.35),
         0 0 14px rgba(93,225,255,0.25);
@@ -99,7 +97,6 @@
       animation: nqrShimmer 1.2s ease-out forwards;
     }
     
-    /* respect reduced motion */
     @media (prefers-reduced-motion: reduce) {
       header nav a::after { display: none; }
       header nav a,
@@ -109,6 +106,7 @@
         text-shadow: none !important;
       }
     }
+    
     .hero {
       text-align: center;
       padding: 100px 20px;
@@ -145,7 +143,7 @@
     }
     .cta-btn:hover {
       background: #00bb88;
-      transform: translateY(-2px);
+      transform: translateY(-2px) scale(1.03);
     }
     .section-title {
       text-align: center;
@@ -165,38 +163,61 @@
       gap: 30px;
       padding: 0 40px 80px;
     }
+
     .card {
+      position: relative;
+      overflow: hidden;
       background-color: #0c1318;
       border: 1px solid rgba(0,255,170,0.15);
       border-radius: 10px;
       padding: 25px;
       text-align: center;
-      transition: 0.25s;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
       cursor: pointer;
     }
+    
     .card:hover {
-      transform: translateY(-6px);
+      transform: translateY(-8px) scale(1.02);
       border-color: #5de1ff;
+      box-shadow: 0 8px 20px rgba(0,255,170,0.1);
     }
-    .card h3 {
-      margin: 10px 0;
-      color: #5de1ff;
+    
+    .card.has-bg {
+      background-color: #0c1318;
     }
-    .card p {
-      font-size: 0.95rem;
-      color: #b9ebd8;
-      min-height: 48px;
+    
+    .card.has-bg::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: var(--bg);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      filter: blur(6px) brightness(0.4);
+      z-index: 0;
+      transition: filter 0.3s ease;
     }
-    .card a {
-      display: inline-block;
-      margin-top: 10px;
-      color: #00ffaa;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.2s;
+    
+    .card.has-bg:hover::before {
+      filter: blur(4px) brightness(0.55);
     }
-    .card a:hover {
-      color: #5de1ff;
+    
+    .card > * {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .card-link-visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
     }
     .about {
       max-width: 900px;
@@ -229,7 +250,6 @@
       }
     }
     
-    /* common fade and slide reveal */
     .reveal {
       opacity: 0;
       transform: translateY(20px);
@@ -240,156 +260,595 @@
       opacity: 1;
       transform: translateY(0);
     }
-    
-    /* card polish */
-    .card {
-      background-color: #0c1318;
-      border: 1px solid rgba(0,255,170,0.15);
-      border-radius: 10px;
-      padding: 25px;
+
+    /* IFRAME VIEWER */
+    #iframe-viewer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #04070a;
+      z-index: 9999;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    #iframe-viewer.active {
+      display: block;
+      opacity: 1;
+    }
+
+    #content-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #fff;
+    }
+
+    /* NAVIGATION SIDEBAR */
+    #nav-sidebar {
+      position: fixed;
+      left: -280px;
+      top: 0;
+      width: 280px;
+      height: 100%;
+      background: linear-gradient(180deg, #0c1318 0%, #04070a 100%);
+      border-right: 1px solid rgba(0,255,170,0.2);
+      z-index: 10000;
+      transition: left 0.3s ease;
+      overflow-y: auto;
+      box-shadow: 4px 0 20px rgba(0,0,0,0.5);
+    }
+
+    #nav-sidebar.open {
+      left: 0;
+    }
+
+    .nav-toggle {
+      position: fixed;
+      left: 10px;
+      top: 10px;
+      width: 50px;
+      height: 50px;
+      background: rgba(12,19,24,0.95);
+      border: 1px solid rgba(0,255,170,0.3);
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 10001;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .nav-toggle:hover {
+      background: rgba(0,255,170,0.1);
+      border-color: #00ffaa;
+    }
+
+    .hamburger {
+      width: 24px;
+      height: 18px;
+      position: relative;
+    }
+
+    .hamburger span {
+      display: block;
+      position: absolute;
+      height: 2px;
+      width: 100%;
+      background: #5de1ff;
+      border-radius: 2px;
+      opacity: 1;
+      left: 0;
+      transition: 0.25s ease-in-out;
+    }
+
+    .hamburger span:nth-child(1) {
+      top: 0px;
+    }
+
+    .hamburger span:nth-child(2) {
+      top: 8px;
+    }
+
+    .hamburger span:nth-child(3) {
+      top: 16px;
+    }
+
+    .nav-toggle.open .hamburger span:nth-child(1) {
+      top: 8px;
+      transform: rotate(135deg);
+    }
+
+    .nav-toggle.open .hamburger span:nth-child(2) {
+      opacity: 0;
+      left: -60px;
+    }
+
+    .nav-toggle.open .hamburger span:nth-child(3) {
+      top: 8px;
+      transform: rotate(-135deg);
+    }
+
+    .nav-header {
+      padding: 30px 20px 20px;
+      border-bottom: 1px solid rgba(0,255,170,0.15);
       text-align: center;
-      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
     }
-    
-    .card:hover {
-      transform: translateY(-8px) scale(1.02);
-      border-color: #5de1ff;
-      box-shadow: 0 8px 20px rgba(0,255,170,0.1);
+
+    .nav-header img {
+      height: 40px;
+      margin-bottom: 10px;
     }
-    
-    /* pulse for CTA button */
-    .cta-btn:hover {
-      background: #00bb88;
-      transform: translateY(-2px) scale(1.03);
+
+    .nav-header h3 {
+      margin: 0;
+      color: #5de1ff;
+      font-size: 1.2rem;
+    }
+
+    .nav-section {
+      padding: 20px;
+    }
+
+    .nav-section-title {
+      font-size: 0.85rem;
+      color: #4da8a1;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      font-weight: bold;
+    }
+
+    .nav-link {
+      display: block;
+      padding: 12px 15px;
+      margin-bottom: 8px;
+      color: #97f3d2;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .nav-link:hover {
+      background: rgba(0,255,170,0.1);
+      border-color: rgba(0,255,170,0.3);
+      color: #00ffaa;
+      transform: translateX(5px);
+    }
+
+    .nav-link.primary {
+      background: rgba(0,119,255,0.2);
+      border-color: rgba(0,119,255,0.4);
+      color: #5de1ff;
+      font-weight: bold;
+    }
+
+    .nav-link.primary:hover {
+      background: rgba(0,187,136,0.2);
+      border-color: #00ffaa;
+    }
+
+    /* MODALS */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 20000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.8);
+      backdrop-filter: blur(5px);
+    }
+
+    .modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: linear-gradient(135deg, #0c1318 0%, #04070a 100%);
+      border: 2px solid rgba(0,255,170,0.3);
+      border-radius: 12px;
+      padding: 40px;
+      max-width: 600px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 0 40px rgba(0,255,170,0.2);
+      animation: modalSlideIn 0.3s ease;
+    }
+
+    @keyframes modalSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid rgba(0,255,170,0.15);
+    }
+
+    .modal-title {
+      font-size: 1.8rem;
+      color: #5de1ff;
+      margin: 0;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: #97f3d2;
+      font-size: 2rem;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.2s ease;
+    }
+
+    .close-btn:hover {
+      background: rgba(255,0,0,0.2);
+      color: #ff5555;
+      transform: rotate(90deg);
+    }
+
+    .modal-body {
+      color: #97f3d2;
+      line-height: 1.8;
+    }
+
+    .modal-body h3 {
+      color: #00ffaa;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .modal-body p {
+      margin-bottom: 15px;
+    }
+
+    .modal-body a {
+      color: #5de1ff;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(93,225,255,0.3);
+      transition: all 0.2s ease;
+    }
+
+    .modal-body a:hover {
+      color: #00ffaa;
+      border-bottom-color: #00ffaa;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(0,255,170,0.15);
+      border: 1px solid rgba(0,255,170,0.3);
+      border-radius: 12px;
+      font-size: 0.85rem;
+      color: #00ffaa;
+      margin-right: 8px;
+      margin-bottom: 8px;
+    }
+
+    /* Main content wrapper */
+    #main-content {
+      transition: opacity 0.3s ease;
+    }
+
+    #main-content.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+        padding: 0 20px 40px;
+      }
+      
+      header {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      nav a {
+        margin: 0 10px;
+      }
+      
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      #nav-sidebar {
+        width: 100%;
+        left: -100%;
+      }
     }
   </style>
 </head>
 
 <body>
 
-<header>
-  <img src="./assets/images/logo.png" alt="NQR Labs Logo">
-  <nav>
+<!-- Main Content (cards view) -->
+<div id="main-content">
+  <header>
+    <img src="./assets/images/logo.png" alt="NQR Labs Logo">
+    <nav>
+      <a href="https://github.com/NQRLabs" target="_blank">GitHub</a>
+      <a href="https://www.youtube.com/@CLU-NQR" target="_blank">YouTube</a>
+      <a href="https://discord.gg/HT9YE8rvuN" target="_blank">Discord</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>NQR Labs</h1>
+    <h2>Where puzzles evolve, and mysteries are engineered</h2>
+    <p>Build your skills, create new challenges, and reveal what hides beneath the surface. The CLU community hunts secrets together, experiments with story and signal, and pushes the craft of interactive mysteries forward.</p>
+  </section>
+
+  <!-- Player Section -->
+  <section id="player-tools" class="reveal">
+    <h2 class="section-title">Player Tools</h2>
+    <p class="section-sub">Discover hidden layers and sharpen your instincts.</p>
+    <div class="grid">
+      <div class="card has-bg" style="--bg: url('./assets/images/SpectroGhost_card.png')" data-internal-link="/SpectroGhost/">
+        <h3>SpectroGhost</h3>
+        <p>Hunt secret messages inside sound with real-time spectrogram exploration.</p>
+        <a href="/SpectroGhost/" class="card-link-visually-hidden">Launch</a>
+      </div>
+      <div class="card has-bg" style="--bg: url('./assets/images/ReSounder_card.png')" data-internal-link="/ReSounder/">
+        <h3>ReSounder</h3>
+        <p>Rebuild audio from spectrograms to test hidden sound puzzles.</p>
+        <a href="/ReSounder/" class="card-link-visually-hidden">Launch</a>
+      </div>
+      <div class="card has-bg" style="--bg: url('./assets/images/GlyphGrid_card.png')" data-internal-link="/GlyphGrid/">
+        <h3>GlyphGrid</h3>
+        <p>Crack cryptograms with intelligent mapping and visual letter tracking.</p>
+        <a href="/GlyphGrid/" class="card-link-visually-hidden">Launch</a>
+      </div>
+      <div class="card has-bg" style="--bg: url('./assets/images/Carbbels_card.png')" data-internal-link="/Carbbels/">
+        <h3>Carbbels</h3>
+        <p>Experiment with anagram layouts and spatial letter reasoning.</p>
+        <a href="/Carbbels/" class="card-link-visually-hidden">Launch</a>
+      </div>
+      <div class="card has-bg" style="--bg: url('./assets/images/WordFlux_card.png')" data-internal-link="/WordFlux/">
+        <h3>WordFlux</h3>
+        <p>Practice word pattern recognition and deduction with fast feedback.</p>
+        <a href="/WordFlux/" class="card-link-visually-hidden">Launch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Creator Tools -->
+  <section id="creator-tools" class="reveal">
+    <h2 class="section-title">Creator Tools</h2>
+    <p class="section-sub">Hide meaning. Build mysteries. Shape the experience.</p>
+    <div class="grid">
+      <div class="card has-bg" style="--bg: url('./assets/images/WordLoom_card.png')" data-internal-link="/WordLoom/">
+        <h3>WordLoom</h3>
+        <p>Weave crosswords quickly for puzzle prototyping and clue delivery.</p>
+        <a href="/WordLoom/" class="card-link-visually-hidden">Launch</a>
+      </div>
+      <div class="card has-bg" style="--bg: url('./assets/images/SpectroGhost_card.png')" data-internal-link="/SpectroGhost/">
+        <h3>SpectroGhost</h3>
+        <p>Create spectrograms of audio you want players to reconstruct with ReSounder.</p>
+        <a href="/SpectroGhost/" class="card-link-visually-hidden">Launch</a>
+      </div>
+      <div class="card has-bg" style="--bg: url('./assets/images/SonoGlyph_card.png')" data-internal-link="/SonoGlyph/">
+        <h3>SonoGlyph</h3>
+        <p>Embed visual art into audio spectrograms using spectral synthesis.</p>
+        <a href="/SonoGlyph/" class="card-link-visually-hidden">Launch</a>
+      </div>
+      <div class="card has-bg" style="--bg: url('./assets/images/Ghostmark_card.png')" data-internal-link="/Ghostmark/">
+        <h3>Ghostmark</h3>
+        <p>Hide a secret image inside another using seeded steganography.</p>
+        <a href="/Ghostmark/" class="card-link-visually-hidden">Launch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Analyst & Experimental Tools -->
+  <section id="analyst-tools" class="reveal">
+    <h2 class="section-title">Analyst and Sandbox Tools</h2>
+    <p class="section-sub">Explore new mechanics. Decode the unknown. Experiment freely.</p>
+    <div class="grid">
+      <div class="card has-bg" style="--bg: url('./assets/images/SpectroGhost_card.png')" data-internal-link="/SpectroGhost/">
+        <h3>SpectroGhost</h3>
+        <p>A fast signal investigation app for deep audio sleuthing.</p>
+        <a href="/SpectroGhost/" class="card-link-visually-hidden">Launch</a>
+      </div>
+      <div class="card has-bg" style="--bg: url('./assets/images/ReSounder_card.png')" data-internal-link="/ReSounder/">
+        <h3>ReSounder</h3>
+        <p>Understand and exploit the link between images and audio.</p>
+        <a href="/ReSounder/" class="card-link-visually-hidden">Launch</a>
+      </div>
+      <div class="card has-bg" style="--bg: url('./assets/images/Carbbels_card.png')" data-internal-link="/Carbbels/">
+        <h3>Carbbels</h3>
+        <p>Experiment with anagram layouts and spatial letter reasoning.</p>
+        <a href="/Carbbels/" class="card-link-visually-hidden">Launch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Zodiac ARG Section -->
+  <section id="zodiac-arg" class="reveal">
+    <h2 class="section-title">The Zodiac Killer's ARG</h2>
+    <p class="section-sub">Uncover the mysteries. Follow the breadcrumbs. Solve the cipher.</p>
+    <div class="grid">
+      <div class="card has-bg" style="--bg: url('./assets/images/zodiac-links_card.png')" data-internal-link="/notion-links.html?src=https://nqrlabs.notion.site/ebd/28dafee319508082ab9eedd14d648567?v=28dafee31950813e889a000c558182e8">
+        <h3>The Zodiac Killer Link Vault</h3>
+        <p>Collected findings, decoded messages, and community contributions.</p>
+        <a href="/notion-links.html?src=https://nqrlabs.notion.site/ebd/28dafee319508082ab9eedd14d648567?v=28dafee31950813e889a000c558182e8" class="card-link-visually-hidden">Browse Archive</a>
+      </div>
+      <div class="card has-bg" style="--bg: url('./assets/images/zodiac-timeline_card.png')" data-internal-link="/notion-links.html?src=https://nqrlabs.notion.site/ebd/285afee319508004b709dedb52644e75?v=285afee319508086be92000c05426c55">
+        <h3>Zodiac Timeline</h3>
+        <p>A comprehensive timeline of discoveries, clues, and revelations.</p>
+        <a href="/notion-links.html?src=https://nqrlabs.notion.site/ebd/285afee319508004b709dedb52644e75?v=285afee319508086be92000c05426c55" class="card-link-visually-hidden">View Timeline</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="latest-updates" class="reveal">
+    <h2 class="section-title">Latest GitHub Updates</h2>
+    <p class="section-sub">Recent GitHub activity from NQR Labs</p>
+    <div id="updates-container" class="grid"></div>
+  </section>
+
+  <section class="about reveal">
+    This is where puzzle solvers and puzzle builders meet. Join the CLU community to collaborate on stories, ciphers, hidden signals, and new ways to reveal what should never be obvious at first glance. Learn. Create. Test ideas. Share discoveries. The rabbit holes go deeper when we explore them together.
+  </section>
+
+  <footer>
+    <span>Copyright (c) <span id="year"></span> NQR Labs</span>
     <a href="https://github.com/NQRLabs" target="_blank">GitHub</a>
     <a href="https://www.youtube.com/@CLU-NQR" target="_blank">YouTube</a>
     <a href="https://discord.gg/HT9YE8rvuN" target="_blank">Discord</a>
-  </nav>
-</header>
+  </footer>
+</div>
 
-<section class="hero">
-  <h1>NQR Labs</h1>
-  <h2>Where puzzles evolve, and mysteries are engineered</h2>
-  <p>Build your skills, create new challenges, and reveal what hides beneath the surface. The CLU community hunts secrets together, experiments with story and signal, and pushes the craft of interactive mysteries forward.</p>
-  <a class="cta-btn" href="#start-here">Choose Your Path</a>
-</section>
+<!-- Iframe Viewer -->
+<div id="iframe-viewer">
+  <iframe id="content-frame"></iframe>
+</div>
 
-<!-- New Player Section -->
-<section id="start-here" class="reveal">
-  <h2 class="section-title">New Player? Start Here</h2>
-  <p class="section-sub">Discover hidden layers and sharpen your instincts.</p>
-  <div class="grid">
-    <div class="card">
-      <h3>SpectroGhost</h3>
-      <p>Hunt secret messages inside sound with real-time spectrogram exploration.</p>
-      <a href="/SpectroGhost/">Launch</a>
+<!-- Navigation Sidebar -->
+<div id="nav-sidebar">
+  <div class="nav-header">
+    <img src="./assets/images/logo.png" alt="NQR Labs">
+    <h3>Navigation</h3>
+  </div>
+  
+  <div class="nav-section">
+    <div class="nav-section-title">Main</div>
+    <a href="#" class="nav-link primary" id="nav-home">Home</a>
+    <a href="#" class="nav-link" id="nav-about">About NQR</a>
+    <a href="#" class="nav-link" id="nav-help">Help & Tips</a>
+  </div>
+  
+  <div class="nav-section">
+    <div class="nav-section-title">Jump to Section</div>
+    <a href="#" class="nav-link" data-scroll-to="player-tools">Player Tools</a>
+    <a href="#" class="nav-link" data-scroll-to="creator-tools">Creator Tools</a>
+    <a href="#" class="nav-link" data-scroll-to="analyst-tools">Analyst Tools</a>
+    <a href="#" class="nav-link" data-scroll-to="zodiac-arg">The Zodiac ARG</a>
+    <a href="#" class="nav-link" data-scroll-to="latest-updates">Latest Updates</a>
+  </div>
+  
+  <div class="nav-section">
+    <div class="nav-section-title">Connect</div>
+    <a href="https://github.com/NQRLabs" target="_blank" class="nav-link">GitHub</a>
+    <a href="https://www.youtube.com/@CLU-NQR" target="_blank" class="nav-link">YouTube</a>
+    <a href="https://discord.gg/HT9YE8rvuN" target="_blank" class="nav-link">Discord</a>
+  </div>
+</div>
+
+<!-- Hamburger Toggle -->
+<div class="nav-toggle" id="nav-toggle">
+  <div class="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<!-- About NQR Modal -->
+<div id="about-modal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="modal-title">About NQR</h2>
+      <button class="close-btn" onclick="closeModal('about-modal')">&times;</button>
     </div>
-    <div class="card">
-      <h3>ReSounder</h3>
-      <p>Rebuild audio from spectrograms to test hidden sound puzzles.</p>
-      <a href="/ReSounder/">Launch</a>
-    </div>
-    <div class="card">
-      <h3>GlyphGrid</h3>
-      <p>Crack cryptograms with intelligent mapping and visual letter tracking.</p>
-      <a href="/GlyphGrid/">Launch</a>
-    </div>
-    <div class="card">
-      <h3>SonoGlyph</h3>
-      <p>Embed visual art into audio spectrums using spectral synthesis.</p>
-      <a href="/SonoGlyph/">Launch</a>
-    </div>
-    <div class="card">
-      <h3>Carbbels</h3>
-      <p>Experiment with anagram layouts and spatial letter reasoning.</p>
-      <a href="/Carbbels/">Launch</a>
-    </div>
-    <div class="card">
-      <h3>WordFlux</h3>
-      <p>Practice word pattern recognition and deduction with fast feedback.</p>
-      <a href="/WordFlux/">Launch</a>
+    <div class="modal-body">
+      <p><strong>NQR Labs</strong> is the creative workspace of a puzzle designer, ARG creator, and mystery engineer who lives for the thrill of hidden layers and encoded stories.</p>
+      
+      <h3>Philosophy</h3>
+      <p>Every puzzle should feel like a discovery, not a chore. The best mysteries respect the solver's intelligence while rewarding persistence, lateral thinking, and collaboration.</p>
+      
+      <h3>Community</h3>
+      <p>These tools are built for the <strong>CLU community</strong>—a collective of puzzle enthusiasts, ARG hunters, and cipher breakers who believe that the best challenges are solved together.</p>
+      
+      <h3>Skills & Interests</h3>
+      <p>
+        <span class="badge">Cryptography</span>
+        <span class="badge">Steganography</span>
+        <span class="badge">Audio Analysis</span>
+        <span class="badge">ARG Design</span>
+        <span class="badge">Interactive Fiction</span>
+        <span class="badge">Puzzle Engineering</span>
+      </p>
+      
+      <h3>Get Involved</h3>
+      <p>Join the <a href="https://discord.gg/HT9YE8rvuN" target="_blank">CLU Discord</a> to collaborate on mysteries, share techniques, and participate in community ARGs.</p>
+      
+      <p>Follow on <a href="https://github.com/NQRLabs" target="_blank">GitHub</a> for open-source puzzle tools and experimental projects.</p>
     </div>
   </div>
-</section>
+</div>
 
-<!-- Creator Tools -->
-<section id="creator-tools" class="reveal">
-  <h2 class="section-title">Creator Tools</h2>
-  <p class="section-sub">Hide meaning. Build mysteries. Shape the experience.</p>
-  <div class="grid">
-    <div class="card">
-      <h3>WordLoom</h3>
-      <p>Weave crosswords quickly for puzzle prototyping and clue delivery.</p>
-      <a href="/WordLoom/">Launch</a>
+<!-- Help Modal -->
+<div id="help-modal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="modal-title">Help & Tips</h2>
+      <button class="close-btn" onclick="closeModal('help-modal')">&times;</button>
     </div>
-    <div class="card">
-      <h3>SpectroGhost</h3>
-      <p>A fast signal investigation app for deep audio sleuthing.</p>
-      <a href="/SpectroGhost/">Launch</a>
-    </div>
-    <div class="card">
-      <h3>Ghostmark</h3>
-      <p>Hide a secret image inside another using seeded steganography.</p>
-      <a href="/Ghostmark/">Launch</a>
-    </div>
-    <div class="card">
-      <h3>SonoGlyph</h3>
-      <p>Embed visual art into audio spectrums using spectral synthesis.</p>
-      <a href="/SonoGlyph/">Launch</a>
+    <div class="modal-body">
+      <h3>🎯 Navigation</h3>
+      <p><strong>Click any card</strong> to launch tools or view content in an embedded viewer. Internal GitHub Pages apps and Notion documents load right here—no need to leave the page.</p>
+      
+      <p><strong>External links</strong> (like GitHub, YouTube, Discord) open in new tabs normally.</p>
+      
+      <h3>🍔 Navigation Menu</h3>
+      <p>Click the <strong>hamburger menu</strong> (☰) in the top-left corner anytime to access navigation options, return home, or jump to different sections.</p>
+      
+      <h3>🔙 Return Home</h3>
+      <p>When viewing content, use the navigation menu and select "Return Home" to get back to the card grid.</p>
+      
+      <h3>📱 Mobile Friendly</h3>
+      <p>All tools and content are responsive and work on mobile devices. The navigation sidebar adapts to smaller screens.</p>
+      
+      <h3>⚡ Quick Sections</h3>
+      <p>Use the "Jump to Section" links in the navigation sidebar to quickly scroll to different parts of the homepage.</p>
+      
+      <h3>💡 Pro Tips</h3>
+      <ul style="text-align: left; padding-left: 20px;">
+        <li>Hold Ctrl/Cmd and click an internal card to open it in a new tab if you prefer</li>
+        <li>Most tools remember your work in browser storage</li>
+        <li>The Zodiac ARG content updates regularly—check back often</li>
+        <li>Join Discord for live collaboration and hints</li>
+      </ul>
+      
+      <h3>🐛 Issues?</h3>
+      <p>If something isn't working, try refreshing the page. For persistent problems, report them on <a href="https://github.com/NQRLabs" target="_blank">GitHub</a> or in the Discord.</p>
     </div>
   </div>
-</section>
-
-<!-- Analyst & Experimental Tools -->
-<section id="analyst-tools" class="reveal">
-  <h2 class="section-title">Analyst and Sandbox Tools</h2>
-  <p class="section-sub">Explore new mechanics. Decode the unknown. Experiment freely.</p>
-  <div class="grid">
-    <div class="card">
-      <h3>SpectroGhost</h3>
-      <p>A fast signal investigation app for deep audio sleuthing.</p>
-      <a href="/SpectroGhost/">Launch</a>
-    </div>
-    <div class="card">
-      <h3>ReSounder</h3>
-      <p>Understand and exploit the link between images and audio.</p>
-      <a href="/ReSounder/">Launch</a>
-    </div>
-    <div class="card">
-      <h3>Carbbels</h3>
-      <p>Experiment with anagram layouts and spatial letter reasoning.</p>
-      <a href="/Carbbels/">Launch</a>
-    </div>
-  </div>
-</section>
-
-<section id="latest-updates" class="reveal">
-  <h2 class="section-title">Latest Updates</h2>
-  <p class="section-sub">Recent GitHub activity from NQR Labs</p>
-  <div id="updates-container" class="grid"></div>
-</section>
-
-<section class="about" class="reveal">
-  This is where puzzle solvers and puzzle builders meet. Join the CLU community to collaborate on stories, ciphers, hidden signals, and new ways to reveal what should never be obvious at first glance. Learn. Create. Test ideas. Share discoveries. The rabbit holes go deeper when we explore them together.
-</section>
-
-<footer>
-  <span>Copyright (c) <span id="year"></span> NQR Labs</span>
-  <a href="https://github.com/NQRLabs" target="_blank">GitHub</a>
-  <a href="https://www.youtube.com/@CLU-NQR" target="_blank">YouTube</a>
-  <a href="https://discord.gg/HT9YE8rvuN" target="_blank">Discord</a>
-</footer>
+</div>
 
 <script>
+  // Reveal on scroll
   function revealOnScroll() {
     const reveals = document.querySelectorAll('.reveal');
     const viewport = window.innerHeight;
@@ -406,23 +865,18 @@
 
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  
+  // Load latest GitHub updates
   async function loadLatestUpdates() {
     const container = document.getElementById('updates-container');
     const username = 'NQRLabs';
-    const maxItems = 4; // change to 3 or 5 if you prefer
+    const maxItems = 4;
   
     try {
       const res = await fetch(`https://api.github.com/users/${username}/repos?sort=updated`);
       const repos = await res.json();
-  
-      // Filter out forks and very small placeholder repos if desired
       const real = repos.filter(r => !r.fork);
-  
-      // Truncate to only a few
       const latest = real.slice(0, maxItems);
   
-      // Render each card
       container.innerHTML = '';
       latest.forEach(repo => {
         const card = document.createElement('div');
@@ -431,7 +885,7 @@
         card.innerHTML = `
           <h3>${repo.name}</h3>
           <p>Last updated: ${updated}</p>
-          <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">View Repo</a>
+          <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="card-link-visually-hidden">View Repo</a>
         `;
         container.appendChild(card);
       });
@@ -442,19 +896,17 @@
   
   loadLatestUpdates();
 
-  /* Upgrade cards so the whole card acts like its primary link */
+  // Card click handling
   function enableCardClicks(scope) {
     var root = scope || document;
     var cards = root.querySelectorAll('.card');
   
     cards.forEach(function(card){
-      // Avoid double-binding if called more than once
       if (card.dataset.clickBound === '1') return;
   
       var link = card.querySelector('a[href]');
       if (!link) return;
   
-      // Accessibility
       card.setAttribute('role', 'link');
       card.setAttribute('tabindex', '0');
       var h3 = card.querySelector('h3');
@@ -462,11 +914,24 @@
         card.setAttribute('aria-label', h3.textContent.trim());
       }
   
-      function activate() {
+      function activate(e) {
         var href = link.getAttribute('href');
         var target = (link.getAttribute('target') || '').toLowerCase();
+        var internalLink = card.dataset.internalLink;
+        
+        // Check if Ctrl/Cmd is held - if so, open in new tab regardless
+        if (e && (e.ctrlKey || e.metaKey)) {
+          window.open(href, '_blank', 'noopener,noreferrer');
+          return;
+        }
+        
+        // If marked as internal, load in iframe
+        if (internalLink) {
+          loadInIframe(internalLink);
+          return;
+        }
   
-        // Use window.open for _blank to avoid popup blockers on programmatic .click()
+        // External link - open in new tab
         if (target === '_blank') {
           window.open(href, '_blank', 'noopener,noreferrer');
         } else {
@@ -474,18 +939,16 @@
         }
       }
   
-      // Click anywhere on the card unless the user clicked a native interactive element
       card.addEventListener('click', function(e){
         if (e.target.closest('a, button, input, textarea, select')) return;
-        activate();
+        activate(e);
       });
   
-      // Keyboard: Enter / Space
       card.addEventListener('keydown', function(e){
         var key = e.key || e.code;
         if (key === 'Enter' || key === ' ') {
           e.preventDefault();
-          activate();
+          activate(e);
         }
       });
   
@@ -493,24 +956,134 @@
     });
   }
   
-  // Run once on initial content
   enableCardClicks(document);
   
   // Re-run after Latest Updates are injected
-  if (typeof loadLatestUpdates === 'function') {
-    // Monkey-patch the loader to call our enhancer when it finishes
-    (async function(){
-      try {
-        await loadLatestUpdates();
-      } catch (err) {
-        // ignore; the section will just stay empty
-      } finally {
-        var updates = document.getElementById('updates-container');
-        if (updates) enableCardClicks(updates);
-      }
-    })();
+  (async function(){
+    try {
+      await loadLatestUpdates();
+    } catch (err) {
+      // ignore
+    } finally {
+      var updates = document.getElementById('updates-container');
+      if (updates) enableCardClicks(updates);
+    }
+  })();
+
+  // Iframe viewer functions
+  function loadInIframe(url) {
+    const viewer = document.getElementById('iframe-viewer');
+    const frame = document.getElementById('content-frame');
+    const mainContent = document.getElementById('main-content');
+    
+    frame.src = url;
+    viewer.classList.add('active');
+    mainContent.classList.add('hidden');
+    
+    // Disable scroll on main page
+    document.body.style.overflow = 'hidden';
   }
 
+  function returnHome() {
+    const viewer = document.getElementById('iframe-viewer');
+    const frame = document.getElementById('content-frame');
+    const mainContent = document.getElementById('main-content');
+    const sidebar = document.getElementById('nav-sidebar');
+    const navToggle = document.getElementById('nav-toggle');
+    
+    viewer.classList.remove('active');
+    mainContent.classList.remove('hidden');
+    sidebar.classList.remove('open');
+    navToggle.classList.remove('open');
+    
+    // Re-enable scroll
+    document.body.style.overflow = '';
+    
+    // Clear iframe after transition
+    setTimeout(() => {
+      frame.src = '';
+    }, 300);
+  }
+
+  // Navigation toggle
+  document.getElementById('nav-toggle').addEventListener('click', function() {
+    const sidebar = document.getElementById('nav-sidebar');
+    const toggle = document.getElementById('nav-toggle');
+    sidebar.classList.toggle('open');
+    toggle.classList.toggle('open');
+  });
+
+  // Nav home button
+  document.getElementById('nav-home').addEventListener('click', function(e) {
+    e.preventDefault();
+    returnHome();
+  });
+
+  // Scroll to section links
+  document.querySelectorAll('[data-scroll-to]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.dataset.scrollTo;
+      
+      // First return home if in iframe view
+      if (document.getElementById('iframe-viewer').classList.contains('active')) {
+        returnHome();
+        // Wait for transition, then scroll
+        setTimeout(() => {
+          const target = document.getElementById(targetId);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 400);
+      } else {
+        // Already on home page, just scroll
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        // Close sidebar on mobile
+        document.getElementById('nav-sidebar').classList.remove('open');
+        document.getElementById('nav-toggle').classList.remove('open');
+      }
+    });
+  });
+
+  // Modal functions
+  document.getElementById('nav-about').addEventListener('click', function(e) {
+    e.preventDefault();
+    openModal('about-modal');
+  });
+
+  document.getElementById('nav-help').addEventListener('click', function(e) {
+    e.preventDefault();
+    openModal('help-modal');
+  });
+
+  function openModal(modalId) {
+    document.getElementById(modalId).classList.add('active');
+  }
+
+  function closeModal(modalId) {
+    document.getElementById(modalId).classList.remove('active');
+  }
+
+  // Close modals on background click
+  document.querySelectorAll('.modal').forEach(modal => {
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        closeModal(modal.id);
+      }
+    });
+  });
+
+  // Close modals on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal.active').forEach(modal => {
+        closeModal(modal.id);
+      });
+    }
+  });
 </script>
 
 </body>

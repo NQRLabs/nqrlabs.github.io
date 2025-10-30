@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NQR Labs – Embed</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; }
+    body {
+      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+    .loading {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #666;
+      font-size: 16px;
+    }
+    iframe.loaded ~ .loading {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <iframe
+    id="embedFrame"
+    src=""
+    width="100%"
+    height="100%"
+    frameborder="0"
+    allowfullscreen
+  ></iframe>
+
+  <div class="loading">Loading…</div>
+
+  <script>
+    const DEFAULT_SRC =
+      "https://nqrlabs.notion.site/ebd/285afee319508004b709dedb52644e75?v=285afee319508086be92000c05426c55"; // your current default
+
+    const params = new URLSearchParams(window.location.search);
+    // allow ?src= or ?url= or even plain ?https://...
+    let src =
+      params.get("src") ||
+      params.get("url") ||
+      (window.location.search.startsWith("?http") ? window.location.search.slice(1) : "");
+
+    // basic safety: only allow Notion embeds (optional but smart)
+    if (src && !src.startsWith("https://") && !src.startsWith("http://")) {
+      src = ""; // bad value, ignore
+    }
+
+    const iframe = document.getElementById("embedFrame");
+    iframe.src = src || DEFAULT_SRC;
+
+    iframe.addEventListener("load", () => {
+      iframe.classList.add("loaded");
+    });
+  </script>
+</body>
+</html>
