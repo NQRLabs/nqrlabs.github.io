@@ -727,10 +727,11 @@
   </section>
 
   <footer>
-    <span>Copyright (c) <span id="year"></span> NQR Labs</span>
     <a href="https://www.youtube.com/@CLU-NQR" target="_blank">YouTube</a>
     <a href="https://discord.gg/HT9YE8rvuN" target="_blank">Discord</a>
     <a href="https://github.com/NQRLabs" target="_blank">GitHub</a>
+    <p></p>
+    <span>Copyright (c) <span id="year"></span> NQR Labs</span>
   </footer>
 </div>
 
@@ -850,6 +851,13 @@
   
   window.addEventListener('scroll', revealOnScroll);
   window.addEventListener('load', revealOnScroll);
+  window.addEventListener('popstate', function (event) {
+    // If we’re in iframe view, go back to main page
+    const viewer = document.getElementById('iframe-viewer');
+    if (viewer.classList.contains('active')) {
+      returnHome();
+    }
+  });
 
   document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -970,6 +978,9 @@
     
     // Disable scroll on main page
     document.body.style.overflow = 'hidden';
+
+    // add a state to history so Back will return here
+    history.pushState({ view: 'frame', src: url }, '', '');
   }
 
   function returnHome() {
