@@ -703,15 +703,16 @@
     <h2 class="section-title">The Zodiac Killer's ARG</h2>
     <p class="section-sub">Uncover the mysteries. Follow the breadcrumbs. Solve the cipher.</p>
     <div class="grid">
-      <div class="card has-bg" style="--bg: url('./assets/images/zodiac-links_card.png')" data-app="zodiac-links" data-internal-Link="/notion-links.html?src=https://nqrlabs.notion.site/ebd/28dafee319508082ab9eedd14d648567?v=28dafee31950813e889a000c558182e8">
+      <div class="card has-bg" style="--bg: url('./assets/images/zodiac-links_card.png')" data-app="zodiac-links" data-internal-Link="/notion-links.html?src=https://nqrlabs.notion.site/ebd/28dafee319508082ab9eedd14d648567?v=28dafee31950813e889a000c558182e8&source=copy_link">
         <h3>The Zodiac Killer Link Vault</h3>
         <p>Collected findings, decoded messages, and community contributions.</p>
-        <a href="/notion-links.html?src=https://nqrlabs.notion.site/ebd/28dafee319508082ab9eedd14d648567?v=28dafee31950813e889a000c558182e8" class="card-link-visually-hidden">Browse Archive</a>
+        <a href="/notion-links.html?src=https://nqrlabs.notion.site/ebd/28dafee319508082ab9eedd14d648567?v=28dafee31950813e889a000c558182e8&source=copy_link" class="card-link-visually-hidden">Browse Archive</a>
       </div>
-      <div class="card has-bg" style="--bg: url('./assets/images/zodiac-timeline_card.png')" data-app="zodiac-timeline" data-internal-Link="/notion-links.html?src=https://nqrlabs.notion.site/285afee319508004b709dedb52644e75?v=285afee3195080deb3a0000c2bf6abac">
+      <div class="card has-bg" style="--bg: url('./assets/images/zodiac-timeline_card.png')" data-app="zodiac-timeline" data-internal-Link="/notion-links.html?src=https://nqrlabs.notion.site/285afee319508004b709dedb52644e75?v=285afee3195080deb3a0000c2bf6abac&source=copy_link">
         <h3>Zodiac Timeline</h3>
         <p>A comprehensive timeline of discoveries, clues, and revelations.</p>
-        <a href="/notion-links.html?src=https://nqrlabs.notion.site/285afee319508004b709dedb52644e75?v=285afee3195080deb3a0000c2bf6abac" class="card-link-visually-hidden">View Timeline</a>
+        <a href="/notion-links.html?src=https://nqrlabs.notion.site/285afee319508004b709dedb52644e75?v=285afee3195080deb3a0000c2bf6abac&source=copy_link" class="card-link-visually-hidden">View Timeline</a>
+
       </div>
     </div>
   </section>
@@ -850,11 +851,7 @@
     const card = document.querySelector(`[data-app="${app}"]`);
     if (!card) return;
 
-    const url = 
-      card.dataset.externalUrl || 
-      card.dataset.internalUrl ||
-      card.dataset.internalLink ||
-      card.dataset.url;
+    const url = getUrlFromCard(card);
     if (url) loadInIframe(url);
   })();
 
@@ -878,6 +875,17 @@
     if (viewer.classList.contains('active')) {
       returnHome();
     }
+  });
+
+  window.addEventListener('hashchange', () => {
+    const app = window.location.hash.slice(1);
+    if (!app) return;
+  
+    const card = document.querySelector(`[data-app="${app}"]`);
+    if (!card) return;
+  
+    const url = getUrlFromCard(card);
+    if (url) loadInIframe(url);
   });
 
   document.getElementById('year').textContent = new Date().getFullYear();
@@ -1003,6 +1011,75 @@
     // add a state to history so Back will return here
     history.pushState({ view: 'frame', src: url }, '', '');
   }
+
+  function getUrlFromCard(card) {
+    let url =
+      card.dataset.externalUrl ||
+      card.dataset.internalUrl ||
+      card.dataset.internalLink ||
+      card.dataset.internallink ||
+      card.dataset.url;
+  
+    if (!url) {
+      url =
+        card.getAttribute('data-external-url') ||
+        card.getAttribute('data-internal-url') ||
+        card.getAttribute('data-internal-link') ||
+        card.getAttribute('data-internal-Link') ||
+        card.getAttribute('data-url');
+    }
+  
+    if (!url) return null;
+  
+    // ?? leave the URL alone here — it's often /notion-links.html?src=...
+    if (!/^https?:\/\//i.test(url)) {
+      if (url.startsWith('/')) {
+        url = window.location.origin + url;
+      } else {
+        url = window.location.origin + '/' + url;
+      }
+    }
+  
+    return url;
+  }
+
+  // 3) open by app id
+  function openByAppId(app) {
+    if (!app) return;
+    const card = document.querySelector(`[data-app="${app}"]`);
+    if (!card) {
+      console.warn('[auto-open] no card for', app);
+      return;
+    }
+    const url = getUrlFromCard(card);
+    console.log('[auto-open]', { app, url });
+    if (url) loadInIframe(url);
+  }
+
+  // 4) run once on load
+  window.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    let app = params.get('app');
+    if (!app && window.location.hash) {
+      app = window.location.hash.slice(1);
+    }
+    openByAppId(app);
+
+    // clicks
+    document.addEventListener('click', (e) => {
+      const card = e.target.closest('.project-card');
+      if (!card) return;
+      const url = getUrlFromCard(card);
+      console.log('[click]', card, url);
+      if (url) loadInIframe(url);
+    });
+  });
+
+  // 5) react to changing #app-name without reloading
+  window.addEventListener('hashchange', () => {
+    const app = window.location.hash.slice(1);
+    openByAppId(app);
+  });
 
   function returnHome() {
     const viewer = document.getElementById('iframe-viewer');
