@@ -594,7 +594,7 @@
 
 <!-- Main Content (cards view) -->
 <div id="main-content">
-  <header id="nav-home">
+  <header id="home">
     <img src="./assets/images/logo.png" alt="NQR Labs Logo">
     <nav>
       <a href="https://www.youtube.com/@CLU-NQR" target="_blank">YouTube</a>
@@ -703,15 +703,15 @@
     <h2 class="section-title">The Zodiac Killer's ARG</h2>
     <p class="section-sub">Uncover the mysteries. Follow the breadcrumbs. Solve the cipher.</p>
     <div class="grid">
-      <div class="card has-bg" style="--bg: url('./assets/images/zodiac-links_card.png')" data-app="zodiac-links" data-internal-Link="/notion-links.html?src=https://nqrlabs.notion.site/ebd/28dafee319508082ab9eedd14d648567?v=28dafee31950813e889a000c558182e8&source=copy_link">
+      <div class="card has-bg" style="--bg: url('./assets/images/zodiac-links_card.png')" data-app="zodiac-links" data-internal-Link="/notion-links.html?src=https://nqrlabs.notion.site/ebd/28dafee319508082ab9eedd14d648567?v=28dafee31950813e889a000c558182e8">
         <h3>The Zodiac Killer Link Vault</h3>
         <p>Collected findings, decoded messages, and community contributions.</p>
-        <a href="/notion-links.html?src=https://nqrlabs.notion.site/ebd/28dafee319508082ab9eedd14d648567?v=28dafee31950813e889a000c558182e8&source=copy_link" class="card-link-visually-hidden">Browse Archive</a>
+        <a href="/notion-links.html?src=https://nqrlabs.notion.site/ebd/28dafee319508082ab9eedd14d648567?v=28dafee31950813e889a000c558182e8" class="card-link-visually-hidden">Browse Archive</a>
       </div>
-      <div class="card has-bg" style="--bg: url('./assets/images/zodiac-timeline_card.png')" data-app="zodiac-timeline" data-internal-Link="/notion-links.html?src=https://nqrlabs.notion.site/285afee319508004b709dedb52644e75?v=285afee3195080deb3a0000c2bf6abac&source=copy_link">
+      <div class="card has-bg" style="--bg: url('./assets/images/zodiac-timeline_card.png')" data-app="zodiac-timeline" data-internal-Link="/notion-links.html?src=https://nqrlabs.notion.site/285afee319508004b709dedb52644e75?v=285afee3195080deb3a0000c2bf6abac">
         <h3>Zodiac Timeline</h3>
         <p>A comprehensive timeline of discoveries, clues, and revelations.</p>
-        <a href="/notion-links.html?src=https://nqrlabs.notion.site/285afee319508004b709dedb52644e75?v=285afee3195080deb3a0000c2bf6abac&source=copy_link" class="card-link-visually-hidden">View Timeline</a>
+        <a href="/notion-links.html?src=https://nqrlabs.notion.site/285afee319508004b709dedb52644e75?v=285afee3195080deb3a0000c2bf6abac" class="card-link-visually-hidden">View Timeline</a>
 
       </div>
     </div>
@@ -750,9 +750,9 @@
   
   <div class="nav-section">
     <div class="nav-section-title">Main</div>
-    <a href="#" class="nav-link" data-scroll-to="nav-home">Home</a>
-    <a href="#" class="nav-link" id="nav-about">About NQR Labs</a>
-    <a href="#" class="nav-link" id="nav-help">Help & Tips</a>
+    <a href="#" class="nav-link" data-scroll-to="home">Home</a>
+    <a href="#" class="nav-link" id="about">About NQR Labs</a>
+    <a href="#" class="nav-link" id="help">Help & Tips</a>
   </div>
   
   <div class="nav-section">
@@ -870,12 +870,18 @@
   window.addEventListener('scroll', revealOnScroll);
   window.addEventListener('load', revealOnScroll);
   window.addEventListener('popstate', function (event) {
-    // If we’re in iframe view, go back to main page
     const viewer = document.getElementById('iframe-viewer');
-    if (viewer.classList.contains('active')) {
-      returnHome();
+    
+    // Only intercept if weâ€™re *still* in iframe view AND the new URL has no hash or an app hash
+    const hash = window.location.hash.slice(1);
+    const sectionIds = ['home', 'player-tools', 'creator-tools', 'analyst-tools', 'zodiac-arg', 'latest-updates', 'about', 'help'];
+  
+    if (viewer.classList.contains('active') && (!hash || !sectionIds.includes(hash))) {
+      // If the hash isnâ€™t a main section (i.e., likely navigating away from app)
+      returnHome(hash);
     }
   });
+
 
   window.addEventListener('hashchange', () => {
     const app = window.location.hash.slice(1);
@@ -1009,7 +1015,11 @@
     document.body.style.overflow = 'hidden';
 
     // add a state to history so Back will return here
-    history.pushState({ view: 'frame', src: url }, '', '');
+    // Update URL hash if loading from a card with data-app attribute
+    const appName = document.querySelector(`[data-internal-link="${url}"]`)?.dataset?.app;
+    if (appName) {
+      history.replaceState(null, '', '#' + appName);
+    }
   }
 
   function getUrlFromCard(card) {
@@ -1031,7 +1041,7 @@
   
     if (!url) return null;
   
-    // ?? leave the URL alone here — it's often /notion-links.html?src=...
+    // ?? leave the URL alone here ï¿½ it's often /notion-links.html?src=...
     if (!/^https?:\/\//i.test(url)) {
       if (url.startsWith('/')) {
         url = window.location.origin + url;
@@ -1048,58 +1058,93 @@
     if (!app) return;
     const card = document.querySelector(`[data-app="${app}"]`);
     if (!card) {
-      console.warn('[auto-open] no card for', app);
       return;
     }
     const url = getUrlFromCard(card);
-    console.log('[auto-open]', { app, url });
     if (url) loadInIframe(url);
   }
 
-  // 4) run once on load
-  window.addEventListener('DOMContentLoaded', () => {
-    const params = new URLSearchParams(window.location.search);
-    let app = params.get('app');
-    if (!app && window.location.hash) {
-      app = window.location.hash.slice(1);
+  // Hash-based routing
+  function handleRoute() {
+    const hash = window.location.hash.slice(1); // Remove the #
+    
+    // No hash - show homepage at top
+    if (!hash) {
+      returnHome(null);
+      return;
     }
-    openByAppId(app);
+    
+    // Handle About and Help modals
+    if (hash === 'about') {
+      openModal('about-modal');
+      closeSidebar();
+      return;
+    }
+    if (hash === 'help') {
+      openModal('help-modal');
+      closeSidebar();
+      return;
+    }
 
-    // clicks
-    document.addEventListener('click', (e) => {
-      const card = e.target.closest('.project-card');
-      if (!card) return;
-      const url = getUrlFromCard(card);
-      console.log('[click]', card, url);
-      if (url) loadInIframe(url);
-    });
-  });
+    // Check if it's a section on the main page
+    const sectionIds = ['home', 'player-tools', 'creator-tools', 'analyst-tools', 'zodiac-arg', 'latest-updates'];
+    if (sectionIds.includes(hash)) {
+      const inIframe = document.getElementById('iframe-viewer').classList.contains('active');
+      if (inIframe) returnHome(hash);
+  
+      setTimeout(() => {
+        const target = document.getElementById(hash);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        closeSidebar();
+      }, inIframe ? 400 : 0);
+  
+      return;
+    }
+    // Otherwise, treat it as an app/content to load in iframe
+    openByAppId(hash);
+  }
 
-  // 5) react to changing #app-name without reloading
-  window.addEventListener('hashchange', () => {
-    const app = window.location.hash.slice(1);
-    openByAppId(app);
-  });
+  // Run on page load
+  window.addEventListener('DOMContentLoaded', handleRoute);
 
-  function returnHome() {
+  // Run when hash changes
+  window.addEventListener('hashchange', handleRoute);
+
+  function returnHome(targetHash) {
     const viewer = document.getElementById('iframe-viewer');
     const frame = document.getElementById('content-frame');
     const mainContent = document.getElementById('main-content');
     const sidebar = document.getElementById('nav-sidebar');
     const navToggle = document.getElementById('nav-toggle');
-    
+  
     viewer.classList.remove('active');
     mainContent.classList.remove('hidden');
     sidebar.classList.remove('open');
     navToggle.classList.remove('open');
-    
-    // Re-enable scroll
     document.body.style.overflow = '';
-    
-    // Clear iframe after transition
+  
+    // clear iframe after transition
     setTimeout(() => {
       frame.src = '';
     }, 300);
+  
+    // interpret the argument
+    if (targetHash === null || targetHash === '' || targetHash === '#') {
+      // "no hash" -> stay on current path
+      history.replaceState(null, '', window.location.pathname);
+    } else if (typeof targetHash === 'string') {
+      // normalize: accept 'zodiac-arg' or '#zodiac-arg'
+      const clean = targetHash.replace(/^#/, '');
+      history.replaceState(null, '', '#' + clean);
+    } else {
+      // fallback to old behavior
+      history.replaceState(null, '', '#home');
+    }
+  }
+
+  function closeSidebar() {
+    document.getElementById('nav-sidebar').classList.remove('open');
+    document.getElementById('nav-toggle').classList.remove('open');
   }
 
   // Navigation toggle
@@ -1110,50 +1155,36 @@
     toggle.classList.toggle('open');
   });
 
-  // Nav home button
-  document.getElementById('nav-home').addEventListener('click', function(e) {
-    e.preventDefault();
-    returnHome();
-  });
-
   // Scroll to section links
   document.querySelectorAll('[data-scroll-to]').forEach(link => {
     link.addEventListener('click', function(e) {
       e.preventDefault();
       const targetId = this.dataset.scrollTo;
       
-      // First return home if in iframe view
-      if (document.getElementById('iframe-viewer').classList.contains('active')) {
-        returnHome();
-        // Wait for transition, then scroll
-        setTimeout(() => {
-          const target = document.getElementById(targetId);
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        }, 400);
-      } else {
-        // Already on home page, just scroll
-        const target = document.getElementById(targetId);
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-        // Close sidebar on mobile
-        document.getElementById('nav-sidebar').classList.remove('open');
-        document.getElementById('nav-toggle').classList.remove('open');
-      }
+      // Update the hash, which will trigger handleRoute
+      window.location.hash = targetId;
+      //closeSidebar();
     });
   });
 
-  // Modal functions
-  document.getElementById('nav-about').addEventListener('click', function(e) {
+  // Nav home button
+  document.getElementById('home').addEventListener('click', function(e) {
     e.preventDefault();
-    openModal('about-modal');
+    window.location.hash = 'home';
+    closeSidebar();
   });
 
-  document.getElementById('nav-help').addEventListener('click', function(e) {
+  // Modal functions
+  document.getElementById('about').addEventListener('click', function(e) {
+    e.preventDefault();
+    openModal('about-modal');
+    closeSidebar();
+  });
+
+  document.getElementById('help').addEventListener('click', function(e) {
     e.preventDefault();
     openModal('help-modal');
+    closeSidebar();
   });
 
   function openModal(modalId) {
