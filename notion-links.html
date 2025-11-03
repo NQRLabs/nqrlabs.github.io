@@ -40,28 +40,30 @@
     allowfullscreen
   ></iframe>
 
-  <div class="loading">Loading…</div>
+  <div class="loading">Loading</div>
 
   <script>
     const DEFAULT_SRC =
-      "https://nqrlabs.notion.site/ebd/285afee319508004b709dedb52644e75?v=285afee319508086be92000c05426c55";
+      "https://nqrlabs.notion.site/ebd/285afee319508004b709dedb52644e75?v=285afee319508086be92000c05426c55"; // your current default
 
     const params = new URLSearchParams(window.location.search);
+    // allow ?src= or ?url= or even plain ?https://...
     let src =
       params.get("src") ||
       params.get("url") ||
-      (window.location.search.startsWith("?http")
-        ? window.location.search.slice(1)
-        : "");
+      (window.location.search.startsWith("?http") ? window.location.search.slice(1) : "");
 
-    // only allow http(s)
+    // basic safety: only allow Notion embeds (optional but smart)
     if (src && !src.startsWith("https://") && !src.startsWith("http://")) {
-      src = "";
-
-      iframe.addEventListener("load", () => {
-        iframe.classList.add("loaded");
-      });
+      src = ""; // bad value, ignore
     }
+
+    const iframe = document.getElementById("embedFrame");
+    iframe.src = src || DEFAULT_SRC;
+
+    iframe.addEventListener("load", () => {
+      iframe.classList.add("loaded");
+    });
   </script>
 </body>
 </html>
