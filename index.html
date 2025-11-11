@@ -162,6 +162,68 @@
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 30px;
       padding: 0 40px 80px;
+      position: relative;
+    }
+
+    /* Collapsible grid styles */
+    .grid-wrapper {
+      position: relative;
+    }
+
+    .grid.collapsed {
+      max-height: 400px;
+      overflow: hidden;
+      padding-bottom: 0;
+    }
+
+    .grid-fade-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 200px;
+      background: linear-gradient(to bottom, transparent 0%, #04070a 85%);
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 0.3s ease;
+      z-index: 10;
+    }
+
+    .grid-fade-overlay.hidden {
+      opacity: 0;
+    }
+
+    .expand-button,
+    .collapse-button {
+      display: block;
+      margin: 20px auto 40px;
+      padding: 12px 32px;
+      background: linear-gradient(135deg, #5de1ff 0%, #00ffaa 100%);
+      border: none;
+      border-radius: 6px;
+      color: #04070a;
+      font-size: 0.95rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 15px rgba(93, 225, 255, 0.3);
+      z-index: 20;
+      position: relative;
+    }
+
+    .expand-button:hover,
+    .collapse-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(93, 225, 255, 0.5);
+    }
+
+    .collapse-button {
+      background: linear-gradient(135deg, #00ffaa 0%, #5de1ff 100%);
+    }
+
+    .expand-button.hidden,
+    .collapse-button.hidden {
+      display: none;
     }
 
     .card {
@@ -689,7 +751,7 @@
       </div>
       <div class="card has-bg" style="--bg: url('./assets/images/Inknigma_card.png')" data-app="Inknigma" data-internal-Link="/Inknigma/">
         <h3>Inknigma</h3>
-        <p>This invisible inkpot can be used to hide multiple clues in images with multiple stego techniques.</p>
+        <p>This invisible inkpot can be used to hide multiple clues in images with independent stego techniques.</p>
         <a href="/Inknigma/" class="card-link-visually-hidden">Launch</a>
       </div>
       <div class="card has-bg" style="--bg: url('./assets/images/Ghostmark_card.png')" data-app="Ghostmark" data-internal-Link="/Ghostmark/">
@@ -1233,6 +1295,118 @@
         closeModal(modal.id);
       });
     }
+  });
+
+  // Collapsible Grid Functionality
+  function initCollapsibleGrids() {
+    const sections = document.querySelectorAll('section');
+
+    sections.forEach(section => {
+      const grid = section.querySelector('.grid');
+      if (!grid) return;
+
+      const cards = Array.from(grid.querySelectorAll('.card'));
+      if (cards.length === 0) return;
+
+      // Detect how many cards fit in first row by checking vertical positions
+      function detectRows() {
+        const firstCardTop = cards[0].getBoundingClientRect().top;
+        let firstRowCount = 0;
+
+        for (let i = 0; i < cards.length; i++) {
+          const cardTop = cards[i].getBoundingClientRect().top;
+          // Allow 5px tolerance for alignment differences
+          if (Math.abs(cardTop - firstCardTop) < 5) {
+            firstRowCount++;
+          } else {
+            break;
+          }
+        }
+
+        return {
+          firstRowCount,
+          hasMultipleRows: firstRowCount < cards.length
+        };
+      }
+
+      const rowInfo = detectRows();
+
+      // Only make collapsible if there are multiple rows
+      if (!rowInfo.hasMultipleRows) return;
+
+      // Check if already initialized
+      if (grid.parentElement.classList.contains('grid-wrapper')) return;
+
+      // Create wrapper
+      const wrapper = document.createElement('div');
+      wrapper.className = 'grid-wrapper';
+      grid.parentNode.insertBefore(wrapper, grid);
+      wrapper.appendChild(grid);
+
+      // Create fade overlay
+      const fadeOverlay = document.createElement('div');
+      fadeOverlay.className = 'grid-fade-overlay';
+      wrapper.appendChild(fadeOverlay);
+
+      // Create expand button
+      const expandButton = document.createElement('button');
+      expandButton.className = 'expand-button';
+      expandButton.textContent = 'Show More ↓';
+      expandButton.setAttribute('aria-label', 'Expand to show all items');
+      wrapper.appendChild(expandButton);
+
+      // Create collapse button (hidden initially)
+      const collapseButton = document.createElement('button');
+      collapseButton.className = 'collapse-button hidden';
+      collapseButton.textContent = 'Show Less ↑';
+      collapseButton.setAttribute('aria-label', 'Collapse to show fewer items');
+      wrapper.appendChild(collapseButton);
+
+      // Set initial collapsed state
+      grid.classList.add('collapsed');
+
+      // Expand handler
+      expandButton.addEventListener('click', () => {
+        grid.classList.remove('collapsed');
+        fadeOverlay.classList.add('hidden');
+        expandButton.classList.add('hidden');
+        collapseButton.classList.remove('hidden');
+      });
+
+      // Collapse handler
+      collapseButton.addEventListener('click', () => {
+        grid.classList.add('collapsed');
+        fadeOverlay.classList.remove('hidden');
+        expandButton.classList.remove('hidden');
+        collapseButton.classList.add('hidden');
+
+        // Smooth scroll to section top
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  }
+
+  // Initialize on load
+  window.addEventListener('load', () => {
+    initCollapsibleGrids();
+  });
+
+  // Reinitialize on resize (in case grid layout changes)
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      // Remove existing wrappers first
+      document.querySelectorAll('.grid-wrapper').forEach(wrapper => {
+        const grid = wrapper.querySelector('.grid');
+        if (grid) {
+          grid.classList.remove('collapsed');
+          wrapper.parentNode.insertBefore(grid, wrapper);
+          wrapper.remove();
+        }
+      });
+      initCollapsibleGrids();
+    }, 250);
   });
 </script>
 
