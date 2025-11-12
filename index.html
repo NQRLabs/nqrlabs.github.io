@@ -784,6 +784,11 @@
         <p>Experiment with generating static and animated glitch text.</p>
         <a href="/Carbbels/" class="card-link-visually-hidden">Launch</a>
       </div>
+      <div class="card has-bg" style="--bg: url('./assets/images/Apoculus_card.png')" data-app="Apoculus" data-internal-Link="/Apoculus/">
+        <h3>Apoculus</h3>
+        <p>Generate puzzle-ready 3D autostereograms in your browser.</p>
+        <a href="/Carbbels/" class="card-link-visually-hidden">Launch</a>
+      </div>
     </div>
   </section>
 
@@ -848,7 +853,6 @@
     <div class="nav-section-title">Jump to Section</div>
     <a href="#" class="nav-link" data-scroll-to="player-tools">Player Tools</a>
     <a href="#" class="nav-link" data-scroll-to="creator-tools">Creator Tools</a>
-    <a href="#" class="nav-link" data-scroll-to="analyst-tools">Analyst Tools</a>
     <a href="#" class="nav-link" data-scroll-to="zodiac-arg">Zodiac ARG</a>
     <a href="#" class="nav-link" data-scroll-to="latest-updates">Latest GitHub Updates</a>
   </div>
@@ -963,7 +967,7 @@
     
     // Only intercept if we’re *still* in iframe view AND the new URL has no hash or an app hash
     const hash = window.location.hash.slice(1);
-    const sectionIds = ['home', 'player-tools', 'creator-tools', 'analyst-tools', 'zodiac-arg', 'latest-updates', 'about', 'help'];
+    const sectionIds = ['home', 'player-tools', 'creator-tools', 'zodiac-arg', 'latest-updates', 'about', 'help'];
   
     if (viewer.classList.contains('active') && (!hash || !sectionIds.includes(hash))) {
       // If the hash isn’t a main section (i.e., likely navigating away from app)
@@ -1176,7 +1180,7 @@
     }
 
     // Check if it's a section on the main page
-    const sectionIds = ['home', 'player-tools', 'creator-tools', 'analyst-tools', 'zodiac-arg', 'latest-updates'];
+    const sectionIds = ['home', 'player-tools', 'creator-tools', 'zodiac-arg', 'latest-updates'];
     if (sectionIds.includes(hash)) {
       const inIframe = document.getElementById('iframe-viewer').classList.contains('active');
       if (inIframe) returnHome(hash);
