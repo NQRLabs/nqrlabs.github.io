@@ -110,7 +110,38 @@
     .hero {
       text-align: center;
       padding: 100px 20px;
-      background: linear-gradient(135deg, #00111a, #000000);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 0;
+    }
+    .hero-bg-image {
+      position: absolute;
+      top: -30px;
+      left: -30px;
+      right: -30px;
+      bottom: -30px;
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.3) saturate(1.2);
+    }
+    .hero-bg-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(0, 17, 26, 0.7), rgba(0, 0, 0, 0.8));
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
     }
     .hero h1 {
       font-size: 3rem;
@@ -171,8 +202,10 @@
     }
 
     .grid.collapsed {
-      max-height: 400px;
+      max-height: 420px;
       overflow: hidden;
+      padding-top: 20px;
+      margin-top: -20px;
       padding-bottom: 0;
     }
 
@@ -242,6 +275,19 @@
       transform: translateY(-8px) scale(1.02);
       border-color: #5de1ff;
       box-shadow: 0 8px 20px rgba(0,255,170,0.1);
+    }
+    .card-coming-soon {
+      border-style: dashed;
+      border-color: rgba(93, 225, 255, 0.3);
+      cursor: default;
+    }
+    .card-coming-soon:hover {
+      transform: none;
+      border-color: rgba(93, 225, 255, 0.5);
+      box-shadow: none;
+    }
+    .card-coming-soon h3 {
+      color: #5de1ff;
     }
     
     .card.has-bg {
@@ -666,9 +712,50 @@
   </header>
 
   <section class="hero">
-    <h1>NQR Labs</h1>
-    <h2>Where puzzles evolve, and mysteries are engineered</h2>
-    <p>Build your skills, create new challenges, and reveal what hides beneath the surface. The CLU community hunts secrets together, experiments with story and signal, and pushes the craft of interactive mysteries forward.</p>
+    <div class="hero-background" data-parallax="0.3">
+<!--
+      <div class="hero-bg-image" style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1920&q=80');"></div>
+    -->
+      <div class="hero-bg-image" style="background-image: url('/assets/images/nqrlabs-hero.png');"></div>
+      <div class="hero-bg-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <h1>NQR Labs</h1>
+      <h2>Where puzzles evolve, and mysteries are engineered</h2>
+      <p>Build your skills, create new challenges, and reveal what hides beneath the surface. The CLU community hunts secrets together, experiments with story and signal, and pushes the craft of interactive mysteries forward.</p>
+    </div>
+  </section>
+
+  <!-- The ARG Player Handbook Section -->
+  <section id="player-handbook" class="reveal">
+    <h2 class="section-title">The ARG Player's Handbook</h2>
+    <p class="section-sub">A Guide to Navigating Worlds Hidden in Plain Sight.</p>
+    <div class="grid">
+      <div class="card has-bg" style="--bg: url('/PlayerHandbook/Chapter01/assets/images/chapter01_card.png')" data-app="Chapter01" data-internal-Link="/PlayerHandbook/Chapter01/">
+        <h3>What is an ARG?</h3>
+        <p>Step through the door to puzzle-driven, interactive unfiction.</p>
+        <a href="/PlayerHandbook/Chapter01/" class="card-link-visually-hidden">Launch</a>
+      </div>
+      <div class="card has-bg" style="--bg: url('/PlayerHandbook/Chapter02/assets/images/chapter02_card.png')" data-app="Chapter02" data-internal-Link="/PlayerHandbook/Chapter02/">
+        <h3>Trailhunters 101</h3>
+        <p>Stop watching recaps of finished games. Start catching ARGs while they're still breathing.</p>
+        <a href="/PlayerHandbook/Chapter02/" class="card-link-visually-hidden">Launch</a>
+      </div>
+      <div class="card has-bg" style="--bg: url('/PlayerHandbook/Chapter03/assets/images/chapter03_card.png')" data-app="Chapter03" data-internal-Link="/PlayerHandbook/Chapter03/">
+        <h3>Breaking the Loop</h3>
+        <p>Escape ARG roadblocks when you're stuck in circles.</p>
+        <a href="/PlayerHandbook/Chapter03/" class="card-link-visually-hidden">Launch</a>
+      </div>
+      <div class="card has-bg" style="--bg: url('/PlayerHandbook/Glossary/assets/images/Glossary_card.png')" data-app="Glossary" data-internal-Link="/PlayerHandbook/Glossary/">
+        <h3>ARG Glossary</h3>
+        <p>Learn the common tongue of rabbit holes.</p>
+        <a href="/PlayerHandbook/Glossary/" class="card-link-visually-hidden">Launch</a>
+      </div>
+      <div class="card has-bg card-coming-soon" style="--bg: url('/assets/images/coming-soon_card.png')">
+        <h3>More Chapters Ahead</h3>
+        <p>New guides are in development. Bookmark this page and check back soon.</p>
+      </div>
+    </div>
   </section>
 
   <!-- Player Section -->
@@ -731,6 +818,37 @@
         <p>Decode autostereograms into depth maps to reveal hidden 3D structures.</p>
         <a href="/Apochron/" class="card-link-visually-hidden">Launch</a>
       </div>
+      <div class="card has-bg card-coming-soon" style="--bg: url('/assets/images/coming-soon_card.png')">
+        <h3>More Tools Coming</h3>
+        <p>We're building new instruments for your investigations. Stay tuned.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The ARG Cookbook Section -->
+  <section id="arg-cookbook" class="reveal">
+    <h2 class="section-title">The ARG Cookbook</h2>
+    <p class="section-sub">Design the mystery. Write the rules. Shape the impossible.</p>
+    <div class="grid">
+      <div class="card has-bg" style="--bg: url('./ARGCookbook/Recipe01/assets/images/recipe01_card.png')" data-app="Recipe01" data-internal-Link="/ARGCookbook/Recipe01/">
+        <h3>How Do I Build My Own ARG?</h3>
+        <p>Hide the clues. Tell the story. Launch your first <b>ARG</b>.</p>
+        <a href="/ARGCookbook/Recipe01/" class="card-link-visually-hidden">Launch</a>
+      </div>
+      <div class="card has-bg" style="--bg: url('./ARGCookbook/Recipe02/assets/images/recipe02_card.png')" data-app="Recipe02" data-internal-Link="/ARGCookbook/Recipe02/">
+        <h3>Trailheads &amp; First Clues</h3>
+        <p>Design an intro puzzle that hooks players, teaches your rules, and opens the door to your world.</p>
+        <a href="/ARGCookbook/Recipe02/" class="card-link-visually-hidden">Launch</a>
+      </div>
+      <div class="card has-bg" style="--bg: url('/PlayerHandbook/Glossary/assets/images/Glossary_card.png')" data-app="Glossary" data-internal-Link="/PlayerHandbook/Glossary/">
+        <h3>ARG Glossary</h3>
+        <p>Learn the common tongue of rabbit holes.</p>
+        <a href="/PlayerHandbook/Glossary/" class="card-link-visually-hidden">Launch</a>
+      </div>
+      <div class="card has-bg card-coming-soon" style="--bg: url('/assets/images/coming-soon_card.png')">
+        <h3>More Recipes Cooking</h3>
+        <p>Fresh techniques are simmering in the lab. New recipes dropping soon.</p>
+      </div>
     </div>
   </section>
 
@@ -761,7 +879,7 @@
       </div>
       <div class="card has-bg" style="--bg: url('./assets/images/Inknigma_card.png')" data-app="Inknigma" data-internal-Link="/Inknigma/">
         <h3>Inknigma</h3>
-        <p>This invisible inkpot can be used to hide multiple clues in images with independent stego techniques.</p>
+        <p>Use this invisible inkpot to hide multiple clues in images with independent stego techniques.</p>
         <a href="/Inknigma/" class="card-link-visually-hidden">Launch</a>
       </div>
       <div class="card has-bg" style="--bg: url('./assets/images/Ghostmark_card.png')" data-app="Ghostmark" data-internal-Link="/Ghostmark/">
@@ -799,24 +917,9 @@
         <p>Test autostereogram quality by decoding depth maps for verification.</p>
         <a href="/Apochron/" class="card-link-visually-hidden">Launch</a>
       </div>
-    </div>
-  </section>
-
-  <!-- The Zodiac ARG Section -->
-  <section id="zodiac-arg" class="reveal">
-    <h2 class="section-title">The Zodiac Killer's ARG</h2>
-    <p class="section-sub">Uncover the mysteries. Follow the breadcrumbs. Solve the cipher.</p>
-    <div class="grid">
-      <div class="card has-bg" style="--bg: url('./assets/images/zodiac-links_card.png')" data-app="zodiac-links" data-internal-Link="/notion-links.html?src=https://nqrlabs.notion.site/ebd/28dafee319508082ab9eedd14d648567?v=28dafee31950813e889a000c558182e8">
-        <h3>The Zodiac Killer Link Vault</h3>
-        <p>Collected findings, decoded messages, and community contributions.</p>
-        <a href="/notion-links.html?src=https://nqrlabs.notion.site/ebd/28dafee319508082ab9eedd14d648567?v=28dafee31950813e889a000c558182e8" class="card-link-visually-hidden">Browse Archive</a>
-      </div>
-      <div class="card has-bg" style="--bg: url('./assets/images/zodiac-timeline_card.png')" data-app="zodiac-timeline" data-internal-Link="/notion-links.html?src=https://nqrlabs.notion.site/ebd/285afee319508004b709dedb52644e75?v=285afee3195080deb3a0000c2bf6abac">
-        <h3>Zodiac Timeline</h3>
-        <p>A comprehensive timeline of discoveries, clues, and revelations.</p>
-        <a href="/notion-links.html?src=https://nqrlabs.notion.site/ebd/285afee319508004b709dedb52644e75?v=285afee3195080deb3a0000c2bf6abac" class="card-link-visually-hidden">View Timeline</a>
-
+      <div class="card has-bg card-coming-soon" style="--bg: url('/assets/images/coming-soon_card.png')">
+        <h3>More Tools on the Workbench</h3>
+        <p>New creation instruments are being forged. Watch this space.</p>
       </div>
     </div>
   </section>
@@ -861,9 +964,10 @@
   
   <div class="nav-section">
     <div class="nav-section-title">Jump to Section</div>
+    <a href="#" class="nav-link" data-scroll-to="player-handbook">The ARG Player's Handbook</a>
     <a href="#" class="nav-link" data-scroll-to="player-tools">Player Tools</a>
+    <a href="#" class="nav-link" data-scroll-to="arg-cookbook">The ARG Cookbook</a>
     <a href="#" class="nav-link" data-scroll-to="creator-tools">Creator Tools</a>
-    <a href="#" class="nav-link" data-scroll-to="zodiac-arg">Zodiac ARG</a>
     <a href="#" class="nav-link" data-scroll-to="latest-updates">Latest GitHub Updates</a>
   </div>
   
@@ -901,7 +1005,8 @@
       <p>These tools are built for the <strong>CLU community</strong>—a collective of puzzle enthusiasts, ARG hunters, and cipher breakers who believe that the best challenges are solved together.</p>
       
       <h3>What makes an ARG</h3>
-      <p>An Alternate Reality Game (ARG) is essentially puzzle-driven interactive unfiction. These experiences are at their best when a community forms around them - sharing discoveries, solving puzzles collaboratively, and uncovering hidden narratives together. The CLU community thrives on this collective spirit, bringing together both players and creators in a shared creative space. Here, ARG creators can test new ideas, gather live feedback, and refine their worlds, while solvers work side by side with them to unravel mysteries and shape stories as they unfold. Whether the puzzles emerge from within our own ranks or from ARGs found out in the wider web, the hunt is always open, and collaboration is always encouraged.</p>
+      <p>An Alternate Reality Game (ARG) is essentially puzzle-driven interactive unfiction. These experiences are at their best when a community forms around them - sharing discoveries, solving puzzles collaboratively, and uncovering hidden narratives together.</p>
+      <p>The CLU community thrives on this collective spirit, bringing together both players and creators in a shared creative space. Here, ARG creators can test new ideas, gather live feedback, and refine their worlds, while solvers work side by side with them to unravel mysteries and shape stories as they unfold. Whether the puzzles emerge from within our own ranks or from ARGs found out in the wider web, the hunt is always open, and collaboration is always encouraged.</p>
       
       <h3>Get Involved</h3>
       <p>Follow on <a href="https://www.youtube.com/@CLU-NQR" target="_blank">YouTube</a> for deep dives into creative tools, ARG walkthroughs, and lessons that lead you further down the rabbit hole.</p>
@@ -941,23 +1046,6 @@
 </div>
 
 <script>
-  (function () {
-    // 1) try ?app=data-app
-    const params = new URLSearchParams(window.location.search);
-    let app = params.get('app');
-
-    // 2) or #data-app
-    if (!app && window.location.hash) app = window.location.hash.slice(1);
-    if (!app) return;
-
-    // Find the right card
-    const card = document.querySelector(`[data-app="${app}"]`);
-    if (!card) return;
-
-    const url = getUrlFromCard(card);
-    if (url) loadInIframe(url);
-  })();
-
   // Reveal on scroll
   function revealOnScroll() {
     const reveals = document.querySelectorAll('.reveal');
@@ -969,32 +1057,27 @@
       }
     });
   }
-  
+
+  // Parallax effect
+  function handleParallax() {
+    const parallaxElements = document.querySelectorAll('[data-parallax]');
+    const scrollY = window.scrollY;
+    parallaxElements.forEach(el => {
+      const speed = parseFloat(el.dataset.parallax) || 0.3;
+      const yOffset = scrollY * speed;
+      const bgImage = el.querySelector('.hero-bg-image');
+      if (bgImage) {
+        bgImage.style.transform = `translateY(${yOffset}px)`;
+      }
+    });
+  }
+
   window.addEventListener('scroll', revealOnScroll);
+  window.addEventListener('scroll', handleParallax);
   window.addEventListener('load', revealOnScroll);
+  // Handle back/forward navigation
   window.addEventListener('popstate', function (event) {
-    const viewer = document.getElementById('iframe-viewer');
-    
-    // Only intercept if we’re *still* in iframe view AND the new URL has no hash or an app hash
-    const hash = window.location.hash.slice(1);
-    const sectionIds = ['home', 'player-tools', 'creator-tools', 'zodiac-arg', 'latest-updates', 'about', 'help'];
-  
-    if (viewer.classList.contains('active') && (!hash || !sectionIds.includes(hash))) {
-      // If the hash isn’t a main section (i.e., likely navigating away from app)
-      returnHome(hash);
-    }
-  });
-
-
-  window.addEventListener('hashchange', () => {
-    const app = window.location.hash.slice(1);
-    if (!app) return;
-  
-    const card = document.querySelector(`[data-app="${app}"]`);
-    if (!card) return;
-  
-    const url = getUrlFromCard(card);
-    if (url) loadInIframe(url);
+    handleRoute();
   });
 
   document.getElementById('year').textContent = new Date().getFullYear();
@@ -1007,10 +1090,15 @@
   
     try {
       const res = await fetch(`https://api.github.com/users/${username}/repos?sort=updated`);
+      if (!res.ok) {
+        // Handle rate limiting or other errors silently
+        container.innerHTML = '<p>GitHub updates temporarily unavailable.</p>';
+        return;
+      }
       const repos = await res.json();
       const real = repos.filter(r => !r.fork);
       const latest = real.slice(0, maxItems);
-  
+
       container.innerHTML = '';
       latest.forEach(repo => {
         const card = document.createElement('div');
@@ -1059,9 +1147,14 @@
           return;
         }
         
-        // If marked as internal, load in iframe
+        // If marked as internal, navigate via hash (browser handles history)
         if (internalLink) {
-          loadInIframe(internalLink);
+          const appName = card.dataset.app;
+          if (appName) {
+            window.location.hash = appName;
+          } else {
+            loadInIframe(internalLink);
+          }
           return;
         }
   
@@ -1105,24 +1198,22 @@
   })();
 
   // Iframe viewer functions
+  let currentIframeUrl = null;
   function loadInIframe(url) {
+    // Prevent loading the same URL twice
+    if (currentIframeUrl === url) return;
+
     const viewer = document.getElementById('iframe-viewer');
     const frame = document.getElementById('content-frame');
     const mainContent = document.getElementById('main-content');
-    
+
+    currentIframeUrl = url;
     frame.src = url;
     viewer.classList.add('active');
     mainContent.classList.add('hidden');
-    
+
     // Disable scroll on main page
     document.body.style.overflow = 'hidden';
-
-    // add a state to history so Back will return here
-    // Update URL hash if loading from a card with data-app attribute
-    const appName = document.querySelector(`[data-internal-link="${url}"]`)?.dataset?.app;
-    if (appName) {
-      history.replaceState(null, '', '#' + appName);
-    }
   }
 
   function getUrlFromCard(card) {
@@ -1168,9 +1259,19 @@
   }
 
   // Hash-based routing
+  let lastRouteHash = undefined;
+  let routeDebounce = null;
   function handleRoute() {
     const hash = window.location.hash.slice(1); // Remove the #
-    
+
+    // Debounce to prevent double-firing from popstate + hashchange
+    if (hash === lastRouteHash) return;
+    if (routeDebounce) clearTimeout(routeDebounce);
+    routeDebounce = setTimeout(() => {
+      lastRouteHash = undefined;
+    }, 100);
+    lastRouteHash = hash;
+
     // No hash - show homepage at top
     if (!hash) {
       returnHome(null);
@@ -1190,7 +1291,7 @@
     }
 
     // Check if it's a section on the main page
-    const sectionIds = ['home', 'player-tools', 'creator-tools', 'zodiac-arg', 'latest-updates'];
+    const sectionIds = ['home', 'player-tools', 'creator-tools', 'arg-cookbook', 'player-handbook', 'zodiac-arg', 'latest-updates'];
     if (sectionIds.includes(hash)) {
       const inIframe = document.getElementById('iframe-viewer').classList.contains('active');
       if (inIframe) returnHome(hash);
@@ -1219,30 +1320,14 @@
     const mainContent = document.getElementById('main-content');
     const sidebar = document.getElementById('nav-sidebar');
     const navToggle = document.getElementById('nav-toggle');
-  
+
     viewer.classList.remove('active');
     mainContent.classList.remove('hidden');
     sidebar.classList.remove('open');
     navToggle.classList.remove('open');
     document.body.style.overflow = '';
-  
-    // clear iframe after transition
-    setTimeout(() => {
-      frame.src = '';
-    }, 300);
-  
-    // interpret the argument
-    if (targetHash === null || targetHash === '' || targetHash === '#') {
-      // "no hash" -> stay on current path
-      history.replaceState(null, '', window.location.pathname);
-    } else if (typeof targetHash === 'string') {
-      // normalize: accept 'zodiac-arg' or '#zodiac-arg'
-      const clean = targetHash.replace(/^#/, '');
-      history.replaceState(null, '', '#' + clean);
-    } else {
-      // fallback to old behavior
-      history.replaceState(null, '', '#home');
-    }
+    currentIframeUrl = null;
+    frame.src = '';
   }
 
   function closeSidebar() {

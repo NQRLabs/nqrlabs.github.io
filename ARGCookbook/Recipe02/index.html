@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trailheads & First Clues | The ARG Cookbook</title>
+    <meta name="description" content="Design your first ARG puzzle - a trailhead that hooks players, teaches your rules, and opens the door to your world.">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Trailheads & First Clues | The ARG Cookbook">
+    <meta property="og:description" content="Design your first ARG puzzle - a trailhead that hooks players, teaches your rules, and opens the door to your world.">
+    <meta property="og:image" content="assets/images/og-image.png">
+    <meta property="og:type" content="website">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="recipe-nav">
+        <div class="nav-container">
+            <a href="/#arg-cookbook" target="_top" class="nav-logo" style="display:flex; align-items:center;">
+                <img src="/assets/images/arg-cookbook_card.png"
+                    alt="ARG logo"
+                    style="height:1.1em; width:auto; vertical-align:middle; margin-right:0.2em;"
+                />
+                <span class="logo-text">The ARG Cookbook</span>
+            </a>
+            <div class="nav-links">
+                <a href="#overview">Overview</a>
+                <a href="#ingredients">Ingredients</a>
+                <a href="#steps">Steps</a>
+                <a href="#examples">Examples</a>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION - Split Screen Layout -->
+    <section class="hero-split" id="hero">
+        <div class="hero-split-image">
+            <div class="hero-image-inner" style="background-image: url('https://images.unsplash.com/photo-1531129915305-9e84bb5a4b15?w=1200&q=80');"></div>
+            <div class="hero-image-overlay"></div>
+        </div>
+        <div class="hero-split-content">
+            <div class="hero-content-inner">
+                <div class="hero-badge animate-on-scroll" data-animation="fade-right">
+                    <span>Recipe</span>
+                </div>
+                <h1 class="hero-title animate-on-scroll" data-animation="fade-right" data-delay="100">
+                    Trailheads & First Clues
+                </h1>
+                <p class="hero-subtitle animate-on-scroll" data-animation="fade-right" data-delay="200">
+                    Design an intro puzzle that hooks players, teaches your rules, and opens the door to your world.
+                </p>
+                <div class="hero-meta animate-on-scroll" data-animation="fade-right" data-delay="300">
+                    <span class="meta-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        45-60 minutes
+                    </span>
+                    <span class="meta-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                        Beginner
+                    </span>
+                </div>
+                <a href="#overview" class="btn btn-primary animate-on-scroll" data-animation="fade-right" data-delay="400">
+                    Start Learning
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- OVERVIEW SECTION -->
+    <section class="section" id="overview">
+        <div class="container">
+            <div class="section-header animate-on-scroll" data-animation="fade-up">
+                <span class="section-label">Overview</span>
+                <h2 class="section-title">What You're Building</h2>
+            </div>
+
+            <div class="overview-columns">
+                <div class="overview-main animate-on-scroll" data-animation="fade-up">
+                    <p class="lead">
+                        Every great ARG has that one moment where reality tilts. A weird image. A broken audio file. A link that definitely shouldn't exist. Most people scroll past. But a few players lean in, poke at it, and suddenly they're inside a world of hidden messages and secret rules.
+                    </p>
+                    <p>
+                        This recipe is about building that moment: your very first puzzle, the trailhead that tells players "you're not just watching a story anymore, you're inside it."
+                    </p>
+                    <p>
+                        You're actually creating three things at once: an <strong>intro puzzle</strong> (a small, solvable challenge), a <strong>trailhead</strong> (the clear "start here" signal), and a <strong>landing zone</strong> (where the puzzle sends them with a promise of more). Get these right and you've built a strong Episode One.
+                    </p>
+                </div>
+                <div class="overview-sidebar animate-on-scroll" data-animation="fade-up" data-delay="200">
+                    <div class="sidebar-card">
+                        <h3>You'll Learn</h3>
+                        <ul class="checklist">
+                            <li>The Invite → Act → Reward formula</li>
+                            <li>How to signal "this is a puzzle"</li>
+                            <li>Designing a landing zone that buys you time</li>
+                            <li>Common traps and how to avoid them</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PULL QUOTE -->
+    <section class="section-quote">
+        <div class="quote-background" data-parallax="0.2">
+            <div class="quote-bg-image" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80');"></div>
+            <div class="quote-bg-overlay"></div>
+        </div>
+        <div class="container">
+            <blockquote class="pull-quote animate-on-scroll" data-animation="scale-up">
+                <p>"You're not just hiding a message. You're opening a door and saying: Come in. The rules are a little different here."</p>
+            </blockquote>
+        </div>
+    </section>
+
+    <!-- INGREDIENTS SECTION - Magazine Grid -->
+    <section class="section section-curved" id="ingredients">
+        <div class="curved-top"></div>
+        <div class="section-content">
+            <div class="container">
+                <div class="section-header animate-on-scroll" data-animation="fade-up">
+                    <span class="section-label">Ingredients</span>
+                    <h2 class="section-title">What You'll Need</h2>
+                </div>
+
+                <div class="ingredients-magazine">
+                    <div class="ingredient-feature animate-on-scroll" data-animation="fade-up">
+                        <div class="ingredient-feature-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                            </svg>
+                        </div>
+                        <h3>One Puzzle Mechanic</h3>
+                        <p>Pick exactly one technique for your intro: invisible ink, spectrogram audio, QR codes, metadata, or cipher text. You'll reuse it later, so choose something that fits your world.</p>
+                    </div>
+
+                    <div class="ingredient-small animate-on-scroll" data-animation="fade-up" data-delay="100">
+                        <div class="ingredient-small-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                <line x1="8" y1="21" x2="16" y2="21"></line>
+                                <line x1="12" y1="17" x2="12" y2="21"></line>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4>NQR Labs Tools</h4>
+                            <p><a href="/#Inknigma">Inknigma</a>, <a href="/#SpectroGhost">SpectroGhost</a>, <a href="/#Liminala">Liminala</a>, <a href="/#Qridian">Qridian</a>, <a href="/#arg-fonts">ARG Fonts</a></p>
+                        </div>
+                    </div>
+
+                    <div class="ingredient-small animate-on-scroll" data-animation="fade-up" data-delay="200">
+                        <div class="ingredient-small-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4>Hosting Platform</h4>
+                            <p>GitHub Pages, Notion, Google Drive, Discord, Tumblr, or simple HTML</p>
+                        </div>
+                    </div>
+
+                    <div class="ingredient-small animate-on-scroll" data-animation="fade-up" data-delay="300">
+                        <div class="ingredient-small-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="16" x2="12" y2="12"></line>
+                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4>Your World's Tone</h4>
+                            <p>Know if it's glitchy horror, investigative, magical, or grounded realistic</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="curved-bottom"></div>
+    </section>
+
+    <!-- STEPS SECTION - Timeline Layout -->
+    <section class="section" id="steps">
+        <div class="container">
+            <div class="section-header animate-on-scroll" data-animation="fade-up">
+                <span class="section-label">Instructions</span>
+                <h2 class="section-title">Step by Step</h2>
+            </div>
+
+            <div class="timeline">
+                <!-- Step 1 -->
+                <div class="timeline-item animate-on-scroll" data-animation="fade-up">
+                    <div class="timeline-marker">1</div>
+                    <div class="timeline-content">
+                        <div class="timeline-image" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&q=80');"></div>
+                        <div class="timeline-text">
+                            <h3>Set the Tone</h3>
+                            <p>Before you build anything, decide: "When players see this for the first time, what feeling do I want to hit them with?"</p>
+                            <ul class="timeline-list">
+                                <li><strong>Glitchy/digital horror:</strong> corrupted images, flickering text</li>
+                                <li><strong>Investigative:</strong> metadata, QR scraps, "evidence" files</li>
+                                <li><strong>Magical/surreal:</strong> runes, symbols, stereograms</li>
+                                <li><strong>Grounded/realistic:</strong> chat screenshots, school docs, emails</li>
+                            </ul>
+                            <p>This feeling tells you what your "weird object" should be: an image, sound clip, screenshot, poster, or fake website.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="timeline-item animate-on-scroll" data-animation="fade-up">
+                    <div class="timeline-marker">2</div>
+                    <div class="timeline-content">
+                        <div class="timeline-image" style="background-image: url('https://images.unsplash.com/photo-1565892171165-1102ae23b255?w=600&q=80');"></div>
+                        <div class="timeline-text">
+                            <h3>Choose One Mechanic</h3>
+                            <p>The intro puzzle is your tutorial, hiding inside the story. Pick exactly one mechanic you want players to learn:</p>
+                            <ul class="timeline-list">
+                                <li>Invisible text in images → <a href="/#Inknigma">Inknigma</a> / <a href="/#Lucyra">Lucyra</a></li>
+                                <li>Words in audio spectrograms → <a href="/#SpectroGhost">SpectroGhost</a></li>
+                                <li>Secret notes in metadata → <a href="/#Liminala">Liminala</a></li>
+                                <li>QR codes disguised as art → <a href="/#Qridian">Qridian</a></li>
+                                <li>Cipher text with custom fonts → <a href="/#arg-fonts">ARG Fonts</a></li>
+                            </ul>
+                            <div class="timeline-tip">
+                                <strong>Pro tip:</strong> Plan to reuse this mechanic later. That's how you teach the rules of your ARG.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="timeline-item animate-on-scroll" data-animation="fade-up">
+                    <div class="timeline-marker">3</div>
+                    <div class="timeline-content">
+                        <div class="timeline-image" style="background-image: url('https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&q=80');"></div>
+                        <div class="timeline-text">
+                            <h3>Make the Weirdness Obvious</h3>
+                            <p>New creators often make their first puzzle too subtle. Players never realize it exists. Don't be sneaky. Be loudly strange.</p>
+                            <ul class="timeline-list">
+                                <li>A photo with one clearly corrupted corner</li>
+                                <li>A file named <code>WHYDIDTHEYSENDTHIS.png</code></li>
+                                <li>A character saying "does this picture look wrong to you?"</li>
+                                <li>Audio with a very noticeable tone layered on top</li>
+                            </ul>
+                            <p>Your job isn't to trick players into missing the puzzle. Your job is to invite them to touch it.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="timeline-item animate-on-scroll" data-animation="fade-up">
+                    <div class="timeline-marker">4</div>
+                    <div class="timeline-content">
+                        <div class="timeline-image" style="background-image: url('https://images.unsplash.com/photo-1488272690691-2636704d6000?w=600&q=80');"></div>
+                        <div class="timeline-text">
+                            <h3>Build the Puzzle Chain</h3>
+                            <p>Most strong intro puzzles follow this pattern:</p>
+                            <ul class="timeline-list">
+                                <li><strong>Invite:</strong> Show the weird object with a caption that nudges them ("Something's wrong with this file")</li>
+                                <li><strong>Act:</strong> One clear action: scan, decode, inspect, listen. Hint the tool in-world ("the truth is in the noise")</li>
+                                <li><strong>Reward:</strong> A phrase, URL, password, or handle that obviously leads somewhere</li>
+                            </ul>
+                            <div class="timeline-tip">
+                                <strong>Remember:</strong> If any piece is missing, players get confused or bored. The reward should scream "this is the next step."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="timeline-item animate-on-scroll" data-animation="fade-up">
+                    <div class="timeline-marker">5</div>
+                    <div class="timeline-content">
+                        <div class="timeline-image" style="background-image: url('https://images.unsplash.com/photo-1642873367427-2face181a04f?w=600&q=80');"></div>
+                        <div class="timeline-text">
+                            <h3>Design the Landing Zone</h3>
+                            <p>Solving the intro should bring players somewhere: a page, channel, file, or inbox. This landing zone needs to do four things:</p>
+                            <ul class="timeline-list">
+                                <li><strong>Confirm they were right:</strong> "ACCESS GRANTED" or "You weren't supposed to find this"</li>
+                                <li><strong>Give a micro-reward:</strong> A bit of lore, a character voice, a symbol that matters later</li>
+                                <li><strong>Buy you time:</strong> "I'm gathering more evidence. Check back soon." or "Decryption in progress: 24%"</li>
+                                <li><strong>Hint the bigger destination:</strong> A blurred folder called FINAL PROTOCOL</li>
+                            </ul>
+                            <p>Keep it simple and easy to update. Notion, a Google Doc, or a basic HTML page all work fine.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXAMPLES SECTION - Masonry Grid -->
+    <section class="section section-dark" id="examples">
+        <div class="container">
+            <div class="section-header animate-on-scroll" data-animation="fade-up">
+                <span class="section-label">Inspiration</span>
+                <h2 class="section-title">Example Structures</h2>
+                <p class="section-subtitle">Remix these patterns for your own intro puzzle</p>
+            </div>
+
+            <div class="examples-masonry">
+                <div class="example-masonry-item example-large animate-on-scroll" data-animation="fade-up">
+                    <div class="example-masonry-image" style="background-image: url('https://images.unsplash.com/photo-1603786419734-909b0373d942?w=800&q=80');"></div>
+                    <div class="example-masonry-content">
+                        <h3>The Corrupted Selfie</h3>
+                        <p>A selfie from a "friend" with one corner obviously glitched. Players inspect it with <a href="/#Lucyra">Lucyra</a> and reveal hidden text: <code>START IN ROOM 204</code>. Landing zone is a simple page titled "Room 204 Log" with one scared entry and a note: "I'm still collecting proof. Check back soon." Teaches: images can hide text.</p>
+                        <span class="example-tag">Invisible Ink</span>
+                    </div>
+                </div>
+
+                <div class="example-masonry-item animate-on-scroll" data-animation="fade-up" data-delay="100">
+                    <div class="example-masonry-image" style="background-image: url('https://images.unsplash.com/photo-1611532736579-6b16e2b50449?w=600&q=80');"></div>
+                    <div class="example-masonry-content">
+                        <h3>The Audio Whisper</h3>
+                        <p>A 10-second voice memo captioned "audio bug?" with words drawn in the spectrogram: <code>CANT TALK HERE</code>. Landing zone looks like a terminal: "Transmission intercepted. Further logs when channel is safe." Teaches: audio is worth analyzing visually.</p>
+                        <span class="example-tag">Spectrogram</span>
+                    </div>
+                </div>
+
+                <div class="example-masonry-item animate-on-scroll" data-animation="fade-up" data-delay="200">
+                    <div class="example-masonry-image" style="background-image: url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=80');"></div>
+                    <div class="example-masonry-content">
+                        <h3>The Evidence File</h3>
+                        <p>An empty-looking PNG named <code>evidence.png</code> from a panicked character. <a href="/#Liminala">Liminala</a> reveals metadata: <code>Artist: donttrusttheprincipal</code>. Landing zone is a shared folder with one visible file and a promise of more. Teaches: metadata matters.</p>
+                        <span class="example-tag">Metadata</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VARIATIONS SECTION -->
+    <section class="section section-curved" id="variations">
+        <div class="curved-top"></div>
+        <div class="section-content">
+            <div class="container">
+                <div class="section-header animate-on-scroll" data-animation="fade-up">
+                    <span class="section-label">Adapt</span>
+                    <h2 class="section-title">Scale to Your Needs</h2>
+                    <p class="section-subtitle">Start simple or go deeper</p>
+                </div>
+
+                <div class="variations-stack">
+                    <div class="variation-stack-item animate-on-scroll" data-animation="fade-up">
+                        <div class="variation-stack-level">Beginner</div>
+                        <div class="variation-stack-content">
+                            <h3>Single QR Code</h3>
+                            <p>Hide a QR code in plain sight on a poster or image. It links directly to your landing zone with a welcome message. One tool, one solve, instant gratification.</p>
+                        </div>
+                    </div>
+
+                    <div class="variation-stack-item animate-on-scroll" data-animation="fade-up" data-delay="100">
+                        <div class="variation-stack-level">Intermediate</div>
+                        <div class="variation-stack-content">
+                            <h3>Standard Mechanic Chain</h3>
+                            <p>The full Invite → Act → Reward pattern with one puzzle tool. Players identify something weird, apply the right technique, get a clear result that leads to your landing zone.</p>
+                        </div>
+                    </div>
+
+                    <div class="variation-stack-item animate-on-scroll" data-animation="fade-up" data-delay="200">
+                        <div class="variation-stack-level">Advanced</div>
+                        <div class="variation-stack-content">
+                            <h3>Multi-Layer Intro</h3>
+                            <p>Two quick solves chained together: find hidden text that gives a password, use the password on a locked page. Still fast but teaches two mechanics and feels more "real."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="curved-bottom"></div>
+    </section>
+
+    <!-- SAFETY SECTION -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header animate-on-scroll" data-animation="fade-up">
+                <span class="section-label">Important</span>
+                <h2 class="section-title">Safety & Boundaries</h2>
+            </div>
+
+            <div class="overview-columns">
+                <div class="overview-main animate-on-scroll" data-animation="fade-up">
+                    <p>You can make your game spooky, intense, and weird without crossing lines. The point is to feel like the world is bending, not to put anyone at risk.</p>
+                    <p><strong>Avoid:</strong> Telling players to trespass or break rules. Using real people without permission. Posting anyone's real personal info. Pushing players toward unsafe stunts.</p>
+                    <p><strong>Good moves:</strong> Keep missions digital or clearly safe. Use fictional names and organizations. Add a disclaimer: "This is a fictional game. Stay safe and follow real-world rules while playing."</p>
+                </div>
+                <div class="overview-sidebar animate-on-scroll" data-animation="fade-up" data-delay="200">
+                    <div class="sidebar-card">
+                        <h3>Quick Checklist</h3>
+                        <ul class="checklist">
+                            <li>Weirdness is obvious enough to notice?</li>
+                            <li>One clear action for players to try?</li>
+                            <li>Reward feels like a next step?</li>
+                            <li>Landing zone buys you time?</li>
+                            <li>Everything safe in the real world?</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="section section-cta">
+        <div class="cta-background" data-parallax="0.25">
+            <div class="cta-bg-image" style="background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&q=80');"></div>
+            <div class="cta-bg-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="cta-content animate-on-scroll" data-animation="fade-up">
+                <h2 class="cta-title">Ready to Open the Door?</h2>
+                <p class="cta-text">Your intro puzzle is Module 1. While players are solving and theorizing, you quietly build Module 2. You only need to stay one or two steps ahead.</p>
+                <div class="cta-buttons">
+                    <a href="#steps" class="btn btn-primary btn-large">Review Steps</a>
+                    <a href="/#arg-cookbook" target="_top" class="btn btn-secondary btn-large">More Recipes</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="recipe-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="/#arg-cookbook" target="_top" class="nav-logo" style="display:flex; align-items:center;">
+                        <img src="/assets/images/arg-cookbook_card.png"
+                            alt="ARG logo"
+                            style="height:1.1em; width:auto; vertical-align:middle; margin-right:0.2em;"
+                        />
+                        <span class="footer-logo">The ARG Cookbook</span>
+                    </a>
+                    <p>A project by <a href="https://nqrlabs.com" target="_blank" rel="noopener">NQR Labs</a></p>
+                </div>
+                <div class="footer-nav">
+                    <a href="/#arg-cookbook" target="_top">All Recipes</a>
+                    <a href="#" data-modal="about">About</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 NQR Labs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODALS -->
+    <div class="modal" id="modal-about">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+            <h2>About This Recipe</h2>
+            <p>This recipe teaches the fundamentals of ARG intro puzzle design: creating a trailhead that hooks players and a landing zone that keeps them engaged while you build more content.</p>
+            <p>Part of <strong><a href="/#arg-cookbook" target="_top">The ARG Cookbook</a></strong> - a collection of practical recipes for building alternate reality games.</p>
+        </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+        <div class="progress-fill"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
