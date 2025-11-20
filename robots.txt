@@ -3,13 +3,8 @@
 User-agent: *
 Allow: /
 
-# Disallow template directories (not meant for public viewing)
-Disallow: /template/
-Disallow: /PlayerHandbook/template_chapter/
-Disallow: /PlayerHandbook/template_chapter2/
-Disallow: /PlayerHandbook/template_glossary/
-Disallow: /ARGCookbook/template_recipe/
-Disallow: /ARGCookbook/template_recipe2/
+# Disallow directories (not meant for public viewing)
+# Disallow: /example/
 
 # Sitemap location
 Sitemap: https://nqrlabs.com/sitemap.xml
