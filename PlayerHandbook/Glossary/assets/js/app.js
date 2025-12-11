@@ -465,14 +465,18 @@
         if (alphabetLinks.length === 0 || letterSections.length === 0) return;
 
         var throttledUpdate = throttle(function() {
-            var scrollPosition = window.pageYOffset + 200;
+            var scrollPosition = window.pageYOffset;
+            var navHeight = document.querySelector('.recipe-nav') ? document.querySelector('.recipe-nav').offsetHeight : 0;
+            var alphabetNavHeight = document.querySelector('.alphabet-nav') ? document.querySelector('.alphabet-nav').offsetHeight : 0;
+            var offset = navHeight + alphabetNavHeight + 50;
             var currentLetter = '';
 
             letterSections.forEach(function(section) {
-                var sectionTop = section.offsetTop;
-                var sectionHeight = section.offsetHeight;
+                var rect = section.getBoundingClientRect();
+                var sectionTop = rect.top + scrollPosition;
+                var sectionBottom = sectionTop + rect.height;
 
-                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                if (scrollPosition + offset >= sectionTop && scrollPosition + offset < sectionBottom) {
                     currentLetter = section.id;
                 }
             });
