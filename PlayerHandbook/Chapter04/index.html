@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crack the Code | The ARG Player's Handbook</title>
+    <meta name="description" content="Cryptograms show up everywhere in ARGs. Learn to crack them by hand with pattern recognition and frequency analysis. No fancy tech required.">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/PlayerHandbook/assets/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/PlayerHandbook/assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/PlayerHandbook/assets/images/favicon-16x16.png">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Crack the Code | The ARG Player's Handbook">
+    <meta property="og:description" content="Cryptograms show up everywhere in ARGs. Learn to crack them by hand with pattern recognition and frequency analysis. No fancy tech required.">
+    <meta property="og:image" content="https://nqrlabs.com/PlayerHandbook/Chapter04/assets/images/og-image.png">
+    <meta property="og:url" content="https://nqrlabs.com/PlayerHandbook/Chapter04/">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Crack the Code | The ARG Player's Handbook">
+    <meta name="twitter:description" content="Cryptograms show up everywhere in ARGs. Learn to crack them by hand with pattern recognition and frequency analysis. No fancy tech required.">
+    <meta name="twitter:image" content="https://nqrlabs.com/PlayerHandbook/Chapter04/assets/images/og-image.png">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://nqrlabs.com/PlayerHandbook/Chapter04/">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <!-- ═══════════════════════════════════════════════════════════════════
+         NAVIGATION
+         ═══════════════════════════════════════════════════════════════════ -->
+    <nav class="recipe-nav">
+        <div class="nav-container">
+            <a href="/#player-handbook" target="_top" class="nav-logo" style="display:flex; align-items:center;">
+                <img src="/assets/images/player-handbook_card.png"
+                    alt="Player Handbook logo"
+                    style="height:1.1em; width:auto; vertical-align:middle; margin-right:0.2em;"
+                />
+                <span class="logo-text">The ARG Player's Handbook</span>
+            </a>
+            <div class="nav-links">
+                <a href="#overview">Overview</a>
+                <a href="#video">Video</a>
+                <a href="#steps">5 Steps</a>
+                <a href="#tools">Tools</a>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         HERO SECTION
+         ═══════════════════════════════════════════════════════════════════ -->
+    <section class="hero" id="hero">
+        <div class="hero-background" data-parallax="0.3">
+            <div class="hero-image" style="background-image: url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1920&q=80');"></div>
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge animate-on-scroll" data-animation="fade-down">
+                <span>Chapter 04</span>
+            </div>
+            <h1 class="hero-title animate-on-scroll" data-animation="fade-up">
+                Crack the Code
+            </h1>
+            <p class="hero-subtitle animate-on-scroll" data-animation="fade-up" data-delay="200">
+                Crack substitution ciphers by hand. No fancy tech. Just pattern-spotting and a little patience.
+            </p>
+            <div class="hero-meta animate-on-scroll" data-animation="fade-up" data-delay="400">
+                <span class="meta-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    15 min read
+                </span>
+                <span class="meta-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                    </svg>
+                    Essential Skill
+                </span>
+            </div>
+            <a href="#overview" class="scroll-indicator animate-on-scroll" data-animation="fade-up" data-delay="600">
+                <span>Scroll to Begin</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         OVERVIEW SECTION
+         ═══════════════════════════════════════════════════════════════════ -->
+    <section class="section section-angled" id="overview">
+        <div class="angled-top"></div>
+        <div class="section-content">
+            <div class="container">
+                <div class="section-header animate-on-scroll" data-animation="fade-up">
+                    <span class="section-label">Overview</span>
+                    <h2 class="section-title">Why This Matters</h2>
+                </div>
+                <div class="overview-grid">
+                    <div class="overview-text animate-on-scroll" data-animation="fade-right">
+                        <p class="lead">
+                            Cryptograms show up everywhere in ARGs, puzzle games, and mystery hunts. Learn to crack them by hand and you'll become the person everyone turns to when they hit a wall.
+                        </p>
+                        <p>
+                            A cryptogram swaps every letter for a different symbol. Each symbol = one letter. Spaces and punctuation stay put.
+                        </p>
+                        <p>
+                            Your job? Figure out the mapping. Reveal the message.
+                        </p>
+                        <p>
+                            No fancy tech. No math genius required. Just pattern-spotting and five repeatable steps. Messages that stump most people? You'll crack them.
+                        </p>
+                    </div>
+                    <div class="overview-card animate-on-scroll" data-animation="fade-left">
+                        <h3>What You'll Learn</h3>
+                        <ul class="checklist">
+                            <li>Identify cipher types fast</li>
+                            <li>Spot word patterns that unlock everything</li>
+                            <li>Use frequency analysis like a detective</li>
+                            <li>Sprint through partial solutions</li>
+                            <li>Verify you cracked it right</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="angled-bottom"></div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         VIDEO SECTION
+         ═══════════════════════════════════════════════════════════════════ -->
+    <section class="section section-dark" id="video">
+        <div class="container">
+            <div class="section-header animate-on-scroll" data-animation="fade-up">
+                <span class="section-label">Learn by Watching</span>
+                <h2 class="section-title">Video Tutorial</h2>
+                <p class="section-subtitle">Prefer to watch instead of read? This video covers all the techniques below.</p>
+            </div>
+
+            <div class="video-container animate-on-scroll" data-animation="fade-up" style="max-width: 900px; margin: 0 auto;">
+                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
+                    <!-- YouTube embed will go here once video is published -->
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; text-align: center; padding: 2rem;">
+                        <div>
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-bottom: 1rem;">
+                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                            </svg>
+                            <p style="margin: 0;">Video coming soon!</p>
+                            <p style="margin: 0.5rem 0 0; font-size: 0.9rem; opacity: 0.8;">Subscribe to @CLU-NQR on YouTube for updates</p>
+                        </div>
+                    </div>
+                    <!-- Replace the above div with this when video is ready:
+                    <iframe
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                        src="https://www.youtube.com/embed/VIDEO_ID_HERE"
+                        title="Steps to Decoding Cryptograms Anyone Can Follow"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+                    -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         5 STEPS SECTION
+         ═══════════════════════════════════════════════════════════════════ -->
+    <section class="section section-steps" id="steps">
+        <div class="container">
+            <div class="section-header animate-on-scroll" data-animation="fade-up">
+                <span class="section-label">The Method</span>
+                <h2 class="section-title">5 Steps to Crack Cryptograms</h2>
+                <p class="section-subtitle">Follow these and watch the message unlock</p>
+            </div>
+
+            <!-- Step 1: Identify Cipher Type -->
+            <div class="step step-right">
+                <div class="step-content animate-on-scroll" data-animation="fade-right">
+                    <div class="step-number">01</div>
+                    <h3 class="step-title">ID the Cipher Type</h3>
+                    <p>First: what kind of cipher is this?</p>
+                    <ul style="margin-top: 1rem;">
+                        <li><strong>All numbers?</strong> Binary (1s and 0s), A1Z26 (A=1, B=2...Z=26), or another number code.</li>
+                        <li><strong>Shifted letters?</strong> Caesar cipher (letters shifted down the alphabet) or ROT13.</li>
+                        <li><strong>Keyword-based scramble?</strong> Vigenère cipher.</li>
+                        <li><strong>Symbols with spaces intact?</strong> Aristocrat substitution cipher. That's our focus.</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Aristocrats</strong> keep spaces and punctuation. That's your advantage. Each letter maps to exactly one symbol. One symbol = one letter. If your message is 28+ characters, you can crack it.</p>
+                </div>
+                <div class="step-visual animate-on-scroll" data-animation="fade-left">
+                    <div class="step-image" style="background-image: url('https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=800&q=80');"></div>
+                </div>
+            </div>
+
+            <!-- Step 2: Word Patterns -->
+            <div class="step step-left">
+                <div class="step-visual animate-on-scroll" data-animation="fade-right">
+                    <div class="step-image" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80');"></div>
+                </div>
+                <div class="step-content animate-on-scroll" data-animation="fade-left">
+                    <div class="step-number">02</div>
+                    <h3 class="step-title">Hunt Short Words</h3>
+                    <p>Short words unlock everything. Start here:</p>
+
+                    <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+                        <h4 style="margin-top: 0; color: var(--color-primary);">1-Letter Words</h4>
+                        <p>Only two choices: <strong>A</strong> or <strong>I</strong>. Formal text? Pick A. Personal text? Pick I.</p>
+
+                        <h4 style="color: var(--color-primary); margin-top: 1.5rem;">2-Letter Words</h4>
+                        <p><strong>OF, TO, IN, IT, IS, AS, AT, ON, BY, WE, US, HE, ME, MY</strong></p>
+                        <p style="font-size: 0.9rem; opacity: 0.8;">Try the top four first: OF, TO, IN, IT.</p>
+
+                        <h4 style="color: var(--color-primary); margin-top: 1.5rem;">3-Letter Words</h4>
+                        <p><strong>THE, AND, FOR, ARE, BUT, NOT, YOU, WHO, WAS, HAS, OUT</strong></p>
+                        <p style="font-size: 0.9rem; opacity: 0.8;">THE is king. See a 3-letter word repeated? Try THE.</p>
+
+                        <h4 style="color: var(--color-primary); margin-top: 1.5rem;">Word Edges</h4>
+                        <ul style="font-size: 0.95rem;">
+                            <li><strong>Common starters:</strong> T-, A-, I-, S-, RE-, UN-, IN-, DIS-, PRE-, CON-/COM-</li>
+                            <li><strong>Common endings:</strong> -E, -S, -D, -T, -ED, -LY, -ING, -TION, -MENT, -NESS</li>
+                            <li><strong>Apostrophes:</strong> N'T (don't), 'S (it's), 'D (I'd), I'M, 'RE, 'VE, 'LL, O' (o'clock)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Frequency Analysis -->
+            <div class="step step-right">
+                <div class="step-content animate-on-scroll" data-animation="fade-right">
+                    <div class="step-number">03</div>
+                    <h3 class="step-title">Count Symbols</h3>
+                    <p>English has patterns. Use them.</p>
+
+                    <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+                        <h4 style="margin-top: 0; color: var(--color-primary);">Single Letters</h4>
+                        <p><strong>E</strong> shows up most. Then <strong>T, A, O, I, N, S, H, R</strong>.</p>
+                        <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 0.5rem;">Most-used symbol? Probably E. Short messages break the rule sometimes.</p>
+
+                        <h4 style="color: var(--color-primary); margin-top: 1.5rem;">Bigrams (2-letter pairs)</h4>
+                        <p><strong>TH, HE, IN, ER, AN, RE, ON, AT, EN, ND, ST, ES</strong></p>
+                        <p style="font-size: 0.9rem; opacity: 0.8;">TH wins. See two symbols stuck together? Try TH.</p>
+
+                        <h4 style="color: var(--color-primary); margin-top: 1.5rem;">Trigrams (3-letter combos)</h4>
+                        <p><strong>THE, AND, ING, ENT, ION, TIO, HER, HAT</strong></p>
+
+                        <h4 style="color: var(--color-primary); margin-top: 1.5rem;">Doubles</h4>
+                        <p><strong>LL, EE, SS, OO, TT, FF, RR, NN</strong></p>
+                        <p style="font-size: 0.9rem; opacity: 0.8;">See a doubled symbol? Instant lock-in.</p>
+                    </div>
+
+                    <p style="margin-top: 1rem;"><strong>Pro move:</strong> Use <a href="/#GlyphGrid" target="_top">GlyphGrid</a> to count automatically. Let the computer crunch numbers. You spot patterns.</p>
+                </div>
+                <div class="step-visual animate-on-scroll" data-animation="fade-left">
+                    <div class="step-image" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80');"></div>
+                </div>
+            </div>
+
+            <!-- Step 4: Puzzle-Solving Sprint -->
+            <div class="step step-left">
+                <div class="step-visual animate-on-scroll" data-animation="fade-right">
+                    <div class="step-image" style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80');"></div>
+                </div>
+                <div class="step-content animate-on-scroll" data-animation="fade-left">
+                    <div class="step-number">04</div>
+                    <h3 class="step-title">Sprint to the Finish</h3>
+                    <p>Partial map? Time to run. Educated guesses + pattern completion = solved puzzle.</p>
+
+                    <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+                        <h4 style="margin-top: 0; color: var(--color-primary);">Rules of the Road</h4>
+                        <ul>
+                            <li><strong>Every word needs vowels.</strong> A, E, I, O, U (sometimes Y). All consonants? Wrong mapping.</li>
+                            <li><strong>H loves T, S, W, C.</strong> Hunt those combos.</li>
+                            <li><strong>Q demands U.</strong> Always.</li>
+                            <li><strong>Common endings:</strong> -ING, -ED, -LY, -TION, -MENT, -NESS</li>
+                            <li><strong>Common starters:</strong>
+                                <ul style="margin-top: 0.5rem;">
+                                    <li>TH-: THE, THAT, THIS, THEM, THEN, THERE, THESE, THEIR, THING</li>
+                                    <li>WH-: WHAT, WHEN, WHERE, WHICH, WHILE, WHO</li>
+                                    <li>IN-: IN, INTO, INSIDE</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h4 style="color: var(--color-primary); margin-top: 1.5rem;">Red Flags</h4>
+                        <p>See these? Rethink your map:</p>
+                        <ul>
+                            <li>Impossible combos: QQ, JJ, VV</li>
+                            <li>Words with zero vowels</li>
+                            <li>Rare letters (Q, X, Z) showing up everywhere</li>
+                        </ul>
+                    </div>
+
+                    <p style="margin-top: 1rem;"><strong>The move:</strong> Solve words with the most known letters first. Each solved letter spreads everywhere. Momentum builds. Try a letter. Doesn't work? Backtrack. That's the game.</p>
+                </div>
+            </div>
+
+            <!-- Step 5: Final Verification -->
+            <div class="step step-right">
+                <div class="step-content animate-on-scroll" data-animation="fade-right">
+                    <div class="step-number">05</div>
+                    <h3 class="step-title">Verify the Solve</h3>
+                    <p>Before you claim victory:</p>
+
+                    <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+                        <h4 style="margin-top: 0; color: var(--color-primary);">Final Checklist</h4>
+                        <ul>
+                            <li>Read the full message as normal English. Does it flow?</li>
+                            <li>Check your key: one symbol = one letter. One letter = one symbol. No crossovers.</li>
+                            <li>No unmapped symbols left behind.</li>
+                            <li>Punctuation and apostrophes make sense.</li>
+                            <li>Message is 28+ characters and reads clean? You cracked it.</li>
+                        </ul>
+                    </div>
+
+                    <p style="margin-top: 1rem;">Something feels off? Check for double-assignments (same letter used twice for different symbols). Make sure you didn't skip anything.</p>
+                </div>
+                <div class="step-visual animate-on-scroll" data-animation="fade-left">
+                    <div class="step-image" style="background-image: url('https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&q=80');"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         TOOLS SECTION
+         ═══════════════════════════════════════════════════════════════════ -->
+    <section class="section section-dark" id="tools">
+        <div class="container">
+            <div class="section-header animate-on-scroll" data-animation="fade-up">
+                <span class="section-label">Your Arsenal</span>
+                <h2 class="section-title">Tools That Help</h2>
+                <p class="section-subtitle">Free resources to speed up the hunt</p>
+            </div>
+            <div class="ingredients-grid">
+                <!-- Tool 1: GlyphGrid -->
+                <div class="ingredient-card animate-on-scroll" data-animation="fade-up" data-delay="0">
+                    <div class="ingredient-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                    </div>
+                    <h3>GlyphGrid</h3>
+                    <p>Cryptogram solver that counts symbols, tracks your key, and makes hand-solving way easier. No logins. No ads. Everything stays local.</p>
+                    <a href="/#GlyphGrid" target="_top" class="btn btn-secondary" style="margin-top: 1rem;">Use GlyphGrid</a>
+                </div>
+
+                <!-- Tool 2: Reference Sheet -->
+                <div class="ingredient-card animate-on-scroll" data-animation="fade-up" data-delay="100">
+                    <div class="ingredient-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                    </div>
+                    <h3>One-Page Reference</h3>
+                    <p>Printable cheat sheet with word patterns, frequency charts, and solving strategies. Keep it next to you for instant lookups.</p>
+                    <a href="/assets/Cryptogram Cracking.pdf" target="_blank" class="btn btn-secondary" style="margin-top: 1rem;">Download PDF</a>
+                </div>
+
+                <!-- Tool 3: Gravity Falls Fonts -->
+                <div class="ingredient-card animate-on-scroll" data-animation="fade-up" data-delay="200">
+                    <div class="ingredient-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="4 7 4 4 20 4 20 7"></polyline>
+                            <line x1="9" y1="20" x2="15" y2="20"></line>
+                            <line x1="12" y1="4" x2="12" y2="20"></line>
+                        </svg>
+                    </div>
+                    <h3>ARG Cipher Fonts</h3>
+                    <p>Free fonts for Gravity Falls ciphers and other ARG symbol sets. Practice with real cryptograms or make your own.</p>
+                    <a href="/#arg-fonts" target="_top" class="btn btn-secondary" style="margin-top: 1rem;">Get Fonts</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         KEY INSIGHTS SECTION
+         ═══════════════════════════════════════════════════════════════════ -->
+    <section class="section section-variations">
+        <div class="angled-top-reverse"></div>
+        <div class="section-content">
+            <div class="container">
+                <div class="section-header animate-on-scroll" data-animation="fade-up">
+                    <span class="section-label">Remember</span>
+                    <h2 class="section-title">Key Principles</h2>
+                </div>
+                <div class="variations-grid">
+                    <!-- Principle 1 -->
+                    <div class="variation-card animate-on-scroll" data-animation="fade-up" data-delay="0">
+                        <div class="variation-header">
+                            <span class="variation-badge">Start Small</span>
+                            <h3>Short Words First</h3>
+                        </div>
+                        <p>1, 2, 3-letter words unlock everything. Solve these and watch the rest fall.</p>
+                    </div>
+                    <!-- Principle 2 -->
+                    <div class="variation-card animate-on-scroll" data-animation="fade-up" data-delay="100">
+                        <div class="variation-header">
+                            <span class="variation-badge">Trust Patterns</span>
+                            <h3>English Has Rules</h3>
+                        </div>
+                        <p>Letter frequency, bigrams, word patterns stay consistent. See TH or ING? Trust it.</p>
+                    </div>
+                    <!-- Principle 3 -->
+                    <div class="variation-card animate-on-scroll" data-animation="fade-up" data-delay="200">
+                        <div class="variation-header">
+                            <span class="variation-badge">Test & Adjust</span>
+                            <h3>Wrong Guesses Happen</h3>
+                        </div>
+                        <p>Like sudoku. Try a letter. Doesn't fit? Backtrack. That's the game.</p>
+                    </div>
+                    <!-- Principle 4 -->
+                    <div class="variation-card animate-on-scroll" data-animation="fade-up" data-delay="300">
+                        <div class="variation-header">
+                            <span class="variation-badge">Practice</span>
+                            <h3>Speed Comes With Reps</h3>
+                        </div>
+                        <p>First one takes 20 minutes. Tenth one takes 5. Pattern recognition becomes muscle memory.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="angled-bottom-reverse"></div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         TAKEAWAYS SECTION
+         ═══════════════════════════════════════════════════════════════════ -->
+    <section class="section section-dark">
+        <div class="container">
+            <div class="section-header animate-on-scroll" data-animation="fade-up">
+                <span class="section-label">Summary</span>
+                <h2 class="section-title">What You've Learned</h2>
+            </div>
+            <div class="overview-card animate-on-scroll" data-animation="fade-up" style="max-width: 700px; margin: 0 auto;">
+                <ul class="checklist">
+                    <li>ID cipher types by looking at symbols, numbers, or letter patterns</li>
+                    <li>Start with 1, 2, 3-letter words for quick wins</li>
+                    <li>Count symbol frequency to find E, T, A and patterns like TH, THE, ING</li>
+                    <li>Use word edges (prefixes, suffixes, apostrophes) to crack more letters</li>
+                    <li>Sprint through partial solutions by tackling constrained words first</li>
+                    <li>Verify the solve: reads clean, one-to-one mapping, no leftovers</li>
+                    <li>Use GlyphGrid and reference sheets to work faster</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         CTA SECTION
+         ═══════════════════════════════════════════════════════════════════ -->
+    <section class="section section-cta">
+        <div class="cta-background" data-parallax="0.25">
+            <div class="cta-bg-image" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80');"></div>
+            <div class="cta-bg-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="cta-content animate-on-scroll" data-animation="fade-up">
+                <h2 class="cta-title">Go Crack Something</h2>
+                <p class="cta-text">ARG teams need codebreakers who crack puzzles everyone else hits a wall on. You've got the techniques. You can be that person.</p>
+                <p class="cta-text">Start practicing. Gravity Falls cryptograms. Puzzle newspapers. Your own creations. Each solve builds pattern recognition. Next one's faster.</p>
+                <div class="cta-buttons">
+                    <a href="/#GlyphGrid" target="_top" class="btn btn-primary btn-large">Try GlyphGrid</a>
+                    <a href="/#player-handbook" target="_top" class="btn btn-secondary btn-large">More Chapters</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         FOOTER
+         ═══════════════════════════════════════════════════════════════════ -->
+    <footer class="recipe-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="/#player-handbook" target="_top" class="nav-logo" style="display:flex; align-items:center;">
+                        <img src="/assets/images/player-handbook_card.png"
+                            alt="Player Handbook logo"
+                            style="height:1.1em; width:auto; vertical-align:middle; margin-right:0.2em;"
+                        />
+                        <span class="footer-logo">The ARG Player's Handbook</span>
+                    </a>
+                    <p>A project by <a href="https://nqrlabs.com" target="_blank" rel="noopener">NQR Labs</a></p>
+                </div>
+                <div class="footer-nav">
+                    <a href="/#player-handbook" target="_top">All Chapters</a>
+                    <a href="#" data-modal="about">About</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <a href="https://youtube.com/@CLU-NQR" target="_blank">YouTube</a> &middot;
+                <a href="https://discord.gg/HT9YE8rvuN" target="_blank">Discord</a> &middot;
+                <a href="https://nqrlabs.com" target="_blank">NQR Labs</a> &middot;
+                <a href="https://github.com/NQRLabs" target="_blank">GitHub</a>
+                <br>
+                <p>&copy; 2025 NQR. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         MODALS
+         ═══════════════════════════════════════════════════════════════════ -->
+    <!-- About Modal -->
+    <div class="modal" id="modal-about">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+            <h2>About This Chapter</h2>
+            <p>Crack the Code teaches cryptogram solving: pattern recognition, frequency analysis, and the puzzle-solving sprint. For ARG players who need to decode substitution ciphers by hand.</p>
+            <p>Part of <strong><a href="/#player-handbook" target="_top">The ARG Player's Handbook</a></strong> - learning modules for playing alternate reality games.</p>
+        </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+        <div class="progress-fill"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
