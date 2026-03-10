@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice on Paper | The ARG Cookbook</title>
+    <meta name="description" content="Turn a voice message into a printed image. Learn how to create spectrogram ciphers with SpectroGhost and ReSounder — printable, mailable, and completely covert.">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/ARGCookbook/assets/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/ARGCookbook/assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/ARGCookbook/assets/images/favicon-16x16.png">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Voice on Paper | The ARG Cookbook">
+    <meta property="og:description" content="Turn a voice message into a printed image. Spectrogram ciphers for ARG creators.">
+    <meta property="og:image" content="https://nqrlabs.com/ARGCookbook/Recipe03/assets/images/og-image.png">
+    <meta property="og:url" content="https://nqrlabs.com/ARGCookbook/Recipe03/">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Voice on Paper | The ARG Cookbook">
+    <meta name="twitter:description" content="Turn a voice message into a printed image. Spectrogram ciphers for ARG creators.">
+    <meta name="twitter:image" content="https://nqrlabs.com/ARGCookbook/Recipe03/assets/images/og-image.png">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://nqrlabs.com/ARGCookbook/Recipe03/">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <!-- ═══════════════════════════════════════════════════════════════════
+         NAVIGATION
+         ═══════════════════════════════════════════════════════════════════ -->
+    <nav class="recipe-nav">
+        <div class="nav-container">
+            <a href="/#arg-cookbook" target="_top" class="nav-logo" style="display:flex; align-items:center;">
+                <img src="/assets/images/arg-cookbook_card.png"
+                    alt="ARG logo"
+                    style="height:1.1em; width:auto; vertical-align:middle; margin-right:0.2em;"
+                />
+                <span class="logo-text">The ARG Cookbook</span>
+            </a>
+            <div class="nav-links">
+                <a href="#overview">Overview</a>
+                <a href="#ingredients">Ingredients</a>
+                <a href="#steps">Steps</a>
+                <a href="#examples">Examples</a>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         HERO SECTION
+         ═══════════════════════════════════════════════════════════════════ -->
+    <section class="hero" id="hero">
+        <div class="hero-background" data-parallax="0.3">
+            <div class="hero-image" style="background-image: url('https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?w=1920&q=80');"></div>
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge animate-on-scroll" data-animation="fade-down">
+                <span>Recipe #03</span>
+            </div>
+            <h1 class="hero-title animate-on-scroll" data-animation="fade-up">
+                Voice on Paper
+            </h1>
+            <p class="hero-subtitle animate-on-scroll" data-animation="fade-up" data-delay="200">
+                Hide a voice inside a picture. Print it on paper. Mail it across the city. Let someone hear it.
+            </p>
+            <div class="hero-meta animate-on-scroll" data-animation="fade-up" data-delay="400">
+                <span class="meta-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    20 minutes
+                </span>
+                <span class="meta-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                    </svg>
+                    Intermediate
+                </span>
+            </div>
+            <a href="#overview" class="scroll-indicator animate-on-scroll" data-animation="fade-up" data-delay="600">
+                <span>Scroll to Begin</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         OVERVIEW SECTION
+         ═══════════════════════════════════════════════════════════════════ -->
+    <section class="section section-angled" id="overview">
+        <div class="angled-top"></div>
+        <div class="section-content">
+            <div class="container">
+                <div class="section-header animate-on-scroll" data-animation="fade-up">
+                    <span class="section-label">Overview</span>
+                    <h2 class="section-title">What You'll Create</h2>
+                </div>
+                <div class="overview-grid">
+                    <div class="overview-text animate-on-scroll" data-animation="fade-right">
+                        <p class="lead">
+                            A spectrogram cipher turns audio into an image. Not metaphorically &mdash; literally. Record a voice message, run it through <a href="/#SpectroGhost">SpectroGhost</a>, and what comes out is a PNG you can print, mail, tape to a park bench, or spray-paint on a wall. Anyone with <a href="/#ReSounder">ReSounder</a> can point their phone at it and hear what it says.
+                        </p>
+                        <p>
+                            Here's what makes this powerful for ARG design: the spectrogram is meaningless to anyone who doesn't know what they're looking at. It's noise. Static. Abstract decoration. Until it isn't. You can hide audio in plain sight &mdash; framed on a wall, tucked inside an envelope, embedded in a printed flyer &mdash; and most people walk right past it. Only players who know to look, and know what tool to use, will hear the message.
+                        </p>
+                        <p>
+                            This is genuinely unexplored territory. The mechanics are simple, the tools are free, and the moment a player hears a voice come out of a piece of paper is hard to overstate. Build it into a treasure hunt, an escape room, a city-wide ARG, or a single unforgettable clue. The medium is the puzzle.
+                        </p>
+                    </div>
+                    <div class="overview-card animate-on-scroll" data-animation="fade-left">
+                        <h3>What You'll Learn</h3>
+                        <ul class="checklist">
+                            <li>How to record audio and convert it into a printable spectrogram</li>
+                            <li>The key settings that control audio quality and reconstruction clarity</li>
+                            <li>How to verify your cipher decodes cleanly before distributing it</li>
+                            <li>How to prepare spectrograms for physical (printed) delivery</li>
+                            <li>How to design the breadcrumb trail that guides players to the decode</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="angled-bottom"></div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         VIDEO SECTION
+         ═══════════════════════════════════════════════════════════════════ -->
+    <section class="section section-video" id="video-intro">
+        <div class="video-background" data-parallax="0.2">
+            <div class="video-bg-image" style="background-image: url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1920&q=80');"></div>
+            <div class="video-bg-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="video-intro animate-on-scroll" data-animation="fade-up">
+                <span class="section-label">Watch &amp; Learn</span>
+                <h2 class="section-title">See It In Action</h2>
+                <p>Watch a voice message get recorded, turned into a spectrogram, exported as a PNG, and decoded back into audio &mdash; all in the browser, in real time.</p>
+            </div>
+            <div class="video-container animate-on-scroll" data-animation="scale-up">
+                <iframe
+                    src="https://www.youtube.com/embed/SPweaabzJPo?si=rjbOgj7ynigAkFZV"
+                    title="Voice on Paper — Spectrogram Ciphers for ARG Creators"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         INGREDIENTS SECTION
+         ═══════════════════════════════════════════════════════════════════ -->
+    <section class="section section-dark" id="ingredients">
+        <div class="container">
+            <div class="section-header animate-on-scroll" data-animation="fade-up">
+                <span class="section-label">Ingredients</span>
+                <h2 class="section-title">What You'll Need</h2>
+            </div>
+            <div class="ingredients-grid">
+                <!-- Ingredient Card 1 -->
+                <div class="ingredient-card animate-on-scroll" data-animation="fade-up" data-delay="0">
+                    <div class="ingredient-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                            <line x1="12" y1="19" x2="12" y2="23"></line>
+                            <line x1="8" y1="23" x2="16" y2="23"></line>
+                        </svg>
+                    </div>
+                    <h3>SpectroGhost</h3>
+                    <p>Free browser tool for recording audio and generating optimized spectrogram PNGs. No install, no login. <a href="/#SpectroGhost">Open SpectroGhost &rarr;</a></p>
+                </div>
+                <!-- Ingredient Card 2 -->
+                <div class="ingredient-card animate-on-scroll" data-animation="fade-up" data-delay="100">
+                    <div class="ingredient-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                        </svg>
+                    </div>
+                    <h3>ReSounder</h3>
+                    <p>Free browser tool for decoding spectrograms back into audio. This is the key your players need. <a href="/#ReSounder">Open ReSounder &rarr;</a></p>
+                </div>
+                <!-- Ingredient Card 3 -->
+                <div class="ingredient-card animate-on-scroll" data-animation="fade-up" data-delay="200">
+                    <div class="ingredient-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                    </div>
+                    <h3>Your Message</h3>
+                    <p>5 to 10 seconds of clear, deliberate speech. Short messages reconstruct cleanly. Long ones get muddy. Write it out before you record.</p>
+                </div>
+                <!-- Ingredient Card 4 -->
+                <div class="ingredient-card animate-on-scroll" data-animation="fade-up" data-delay="300">
+                    <div class="ingredient-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                    </div>
+                    <h3>A Delivery Plan</h3>
+                    <p>Digital PNG? Printed page? Wax-sealed envelope? Telephone pole sticker? Decide how players encounter the cipher &mdash; the medium shapes the mystery.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         STEPS SECTION
+         ═══════════════════════════════════════════════════════════════════ -->
+    <section class="section section-steps" id="steps">
+        <div class="container">
+            <div class="section-header animate-on-scroll" data-animation="fade-up">
+                <span class="section-label">Instructions</span>
+                <h2 class="section-title">Step by Step</h2>
+            </div>
+
+            <!-- Step 1 -->
+            <div class="step step-right">
+                <div class="step-content animate-on-scroll" data-animation="fade-right">
+                    <div class="step-number">01</div>
+                    <h3 class="step-title">Craft Your Message</h3>
+                    <p>Before you open SpectroGhost, decide what you want to say. Clarity is everything here. ReSounder uses the Griffin-Lim algorithm to reconstruct audio from your spectrogram &mdash; and that algorithm has to estimate phase information that was lost when the sound became an image. It's good. It's not magic. Clear, deliberate speech gives it the best shot.</p>
+                    <p>Speak slowly. Enunciate. Write out your message first and read it aloud a few times before recording. Five to ten seconds is the sweet spot &mdash; short enough to reconstruct cleanly, long enough to carry a real message. Think about the moment your player hears it. What do you want them to feel? Write the message backward from that reaction.</p>
+                    <div class="step-tip">
+                        <strong>Pro Tip:</strong> The spectrogram cipher works best as a single decisive moment &mdash; a coordinate, a name, a command. Resist the urge to encode a paragraph. Make every second count.
+                    </div>
+                </div>
+                <div class="step-visual animate-on-scroll" data-animation="fade-left">
+                    <div class="step-image" style="background-image: url('https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=800&q=80');"></div>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step step-left">
+                <div class="step-visual animate-on-scroll" data-animation="fade-right">
+                    <div class="step-image" style="background-image: url('assets/images/step-02-create-spectrogram.png');"></div>
+                </div>
+                <div class="step-content animate-on-scroll" data-animation="fade-left">
+                    <div class="step-number">02</div>
+                    <h3 class="step-title">Create the Spectrogram</h3>
+                    <p>Open <a href="/#SpectroGhost">SpectroGhost</a> and hit Record. Say your message. When you stop, SpectroGhost generates the spectrogram in real time &mdash; you can watch it paint itself as you speak. Three settings to dial in:</p>
+                    <ul class="step-list">
+                        <li><strong>FFT Size (default: 2048)</strong> &mdash; Controls the frequency/time resolution tradeoff. Higher values sound auto-tuned. Lower sounds robotic. For speech, 2048 is almost always right.</li>
+                        <li><strong>Maximum Frequency (5000 Hz for voice)</strong> &mdash; Human speech lives below 5 kHz. Going lower makes voices muddy. Going higher wastes image space.</li>
+                        <li><strong>Overlap (default: 75%)</strong> &mdash; More overlap, smoother reconstruction. The default works. Adjust only if you hear artifacts.</li>
+                    </ul>
+                    <p>When your settings look right, click <strong>Optimize</strong>. This recalculates image dimensions so every pixel maps one-to-one to actual frequency data &mdash; no wasted space, no interpolation. It also embeds metadata into the PNG so ReSounder auto-configures when players open the file. Then click <strong>Export PNG</strong>.</p>
+                    <div class="step-tip">
+                        <strong>Pro Tip:</strong> Leave the Colormap on Grayscale. It only needs black ink and survives scanning and photography far better than any color map.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="step step-right">
+                <div class="step-content animate-on-scroll" data-animation="fade-right">
+                    <div class="step-number">03</div>
+                    <h3 class="step-title">Verify the Decode</h3>
+                    <p>Before you distribute anything, confirm the spectrogram actually decodes. This takes thirty seconds and saves you from shipping a broken cipher.</p>
+                    <p>In SpectroGhost, press <strong>Ctrl+Shift+C</strong> to copy the spectrogram to your clipboard. Switch to <a href="/#ReSounder">ReSounder</a> and press <strong>Ctrl+V</strong> to paste it directly. ReSounder reads the embedded metadata and auto-fills every setting. Turn your speakers down first &mdash; you don't know how loud it will come out. Then click <strong>Invert Spectrogram</strong>.</p>
+                    <ul class="step-list">
+                        <li><strong>Message is clear:</strong> Move on to Step 4.</li>
+                        <li><strong>Sounds muddy or robotic:</strong> Go back and adjust FFT Size or Overlap, re-record, try again.</li>
+                        <li><strong>Wrong pitch or speed:</strong> Check that Sample Rate and Max Frequency match between tools.</li>
+                    </ul>
+                    <div class="step-tip">
+                        <strong>Bonus:</strong> The clipboard shortcut also lets you decode any spectrogram you find online &mdash; screenshot it, paste into ReSounder, and hear what it says.
+                    </div>
+                </div>
+                <div class="step-visual animate-on-scroll" data-animation="fade-left">
+                    <div class="step-image" style="background-image: url('assets/images/step-03-verify-decode.png');"></div>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="step step-left">
+                <div class="step-visual animate-on-scroll" data-animation="fade-right">
+                    <div class="step-image" style="background-image: url('assets/images/step-04-physical-delivery.png');"></div>
+                </div>
+                <div class="step-content animate-on-scroll" data-animation="fade-left">
+                    <div class="step-number">04</div>
+                    <h3 class="step-title">Prepare for Physical Delivery</h3>
+                    <p>Sending the PNG digitally? You're already done &mdash; embedded metadata handles everything. Players open the file, click once, hear the message.</p>
+                    <p>Physical delivery is where this gets interesting. Printed spectrograms work, but they need a little preparation before they leave your hands:</p>
+                    <ul class="step-list">
+                        <li><strong>Add a border</strong> &mdash; Open the spectrogram in any image editor (PowerPoint works fine) and add a thin rectangular border. When players photograph or scan the print, they need a clean edge to crop to. A slightly tilted photo distorts the reconstruction.</li>
+                        <li><strong>Print at high resolution</strong> &mdash; Use your printer's highest quality setting. More detail in the print means better reconstruction on the other end.</li>
+                        <li><strong>Test the full loop</strong> &mdash; Print it. Photograph it with your phone. Open the photo in ReSounder, use the Image Adjustments panel to crop to the border, adjust brightness if needed, then decode. If you can't get clear audio, your players won't either.</li>
+                    </ul>
+                    <div class="step-tip">
+                        <strong>Note:</strong> ReSounder's Image Adjustments panel has crop, rotation, keystone correction, and auto-levels built in &mdash; designed specifically for working with photographed spectrograms.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="step step-right">
+                <div class="step-content animate-on-scroll" data-animation="fade-right">
+                    <div class="step-number">05</div>
+                    <h3 class="step-title">Design the Player Experience</h3>
+                    <p>This is where ARG craft comes in. When players decode an original exported PNG, metadata handles everything automatically. But if your spectrogram has been printed, photographed off a wall, or screenshotted, the metadata is gone &mdash; and players will need four things to configure ReSounder manually:</p>
+                    <ul class="step-list">
+                        <li><strong>Sample Rate:</strong> 48 kHz (ReSounder's default &mdash; design around it)</li>
+                        <li><strong>FFT Size:</strong> 2048 (match what you used in SpectroGhost)</li>
+                        <li><strong>Max Frequency:</strong> 5000 Hz (or whatever you set)</li>
+                        <li><strong>Duration:</strong> Roughly how long the audio is</li>
+                    </ul>
+                    <p>How you communicate these is part of the puzzle design. Add them to the PNG border before exporting. Encode them in a separate clue. Tell players to use default settings and design your spectrogram around those. Or let ReSounder's built-in troubleshooting guide carry the determined solvers.</p>
+                    <p>The bigger design question: how do players know to use ReSounder at all? Don't make finding the tool the hard part. Give them a breadcrumb &mdash; a QR code, a note that says "this image speaks," a URL in the corner. Let the challenge be the content of the message. The moment they hear a voice come out of printed paper is the payoff. Don't bury that under a tool-discovery puzzle.</p>
+                    <div class="step-tip">
+                        <strong>Remember:</strong> The medium is part of the message. A spectrogram inside a wax-sealed envelope hits differently than one stapled to a telephone pole. Choose your delivery with intention.
+                    </div>
+                </div>
+                <div class="step-visual animate-on-scroll" data-animation="fade-left">
+                    <div class="step-image" style="background-image: url('assets/images/step-05-player-experience.png');"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         EXAMPLES SECTION
+         ═══════════════════════════════════════════════════════════════════ -->
+    <section class="section section-examples" id="examples">
+        <div class="examples-background" data-parallax="0.15">
+            <div class="examples-bg-image" style="background-image: url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1920&q=80');"></div>
+            <div class="examples-bg-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="section-header animate-on-scroll" data-animation="fade-up">
+                <span class="section-label">Examples</span>
+                <h2 class="section-title">Imagine the Possibilities</h2>
+                <p class="section-subtitle">Anywhere you can put an image, you can now put something people can listen to.</p>
+            </div>
+            <div class="examples-grid">
+                <!-- Example 1 -->
+                <div class="example-card animate-on-scroll" data-animation="fade-up" data-delay="0">
+                    <div class="example-image" style="background-image: url('assets/images/example-treasure-hunt.png');"></div>
+                    <div class="example-content">
+                        <h3>The Treasure Hunt Trail</h3>
+                        <p>Each physical location has a printed spectrogram. Players photograph it, hear a voice with coordinates or a riddle, and are directed to the next stop. The cipher is the mechanic. The voice is the payoff.</p>
+                    </div>
+                </div>
+                <!-- Example 2 -->
+                <div class="example-card animate-on-scroll" data-animation="fade-up" data-delay="100">
+                    <div class="example-image" style="background-image: url('assets/images/example-escape-room.png');"></div>
+                    <div class="example-content">
+                        <h3>The Escape Room Voice</h3>
+                        <p>A framed piece of abstract art hangs on the wall. Players eventually realize it looks like a spectrogram. They photograph it, load it into ReSounder, and hear someone whisper the combination. The art was always speaking.</p>
+                    </div>
+                </div>
+                <!-- Example 3 -->
+                <div class="example-card animate-on-scroll" data-animation="fade-up" data-delay="200">
+                    <div class="example-image" style="background-image: url('assets/images/example-field-drop.png');"></div>
+                    <div class="example-content">
+                        <h3>The Field Drop</h3>
+                        <p>Spectrogram stickers appear at real locations across a city. Each encodes a fragment of a message. Players who know to look find them, decode them, and piece together the full transmission. The city becomes the puzzle board.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         VARIATIONS SECTION
+         ═══════════════════════════════════════════════════════════════════ -->
+    <section class="section section-variations">
+        <div class="angled-top-reverse"></div>
+        <div class="section-content">
+            <div class="container">
+                <div class="section-header animate-on-scroll" data-animation="fade-up">
+                    <span class="section-label">Variations</span>
+                    <h2 class="section-title">Mix It Up</h2>
+                    <p class="section-subtitle">Scale the complexity to match your players, your timeline, and your ARG's tone.</p>
+                </div>
+                <div class="variations-grid">
+                    <!-- Variation 1 -->
+                    <div class="variation-card animate-on-scroll" data-animation="fade-up" data-delay="0">
+                        <div class="variation-header">
+                            <span class="variation-badge">Beginner</span>
+                            <h3>Digital-Only Delivery</h3>
+                        </div>
+                        <p>Send players the exported PNG directly. Embedded metadata auto-configures ReSounder &mdash; they open the file, click once, hear the message. No print prep, no parameter hints, no physical logistics. Great for testing the mechanic before committing to a full deployment.</p>
+                    </div>
+                    <!-- Variation 2 -->
+                    <div class="variation-card animate-on-scroll" data-animation="fade-up" data-delay="100">
+                        <div class="variation-header">
+                            <span class="variation-badge">Intermediate</span>
+                            <h3>Printed with a Breadcrumb</h3>
+                        </div>
+                        <p>Print the spectrogram and include a clear pointer to ReSounder &mdash; a QR code, a URL, or a note explaining what to do. The physical object creates weight and mystery. The breadcrumb removes friction. Players feel clever for decoding it, not frustrated by the tool hunt.</p>
+                    </div>
+                    <!-- Variation 3 -->
+                    <div class="variation-card animate-on-scroll" data-animation="fade-up" data-delay="200">
+                        <div class="variation-header">
+                            <span class="variation-badge">Advanced</span>
+                            <h3>Environmental &mdash; No Instructions</h3>
+                        </div>
+                        <p>Distribute printed spectrograms in real locations with no explanation. Players must identify what they're looking at, find the tool, figure out the settings, and decode. Use this only if tool discovery is an intentional puzzle layer &mdash; and only for players who love that kind of challenge.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="angled-bottom-reverse"></div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         CTA SECTION
+         ═══════════════════════════════════════════════════════════════════ -->
+    <section class="section section-cta">
+        <div class="cta-background" data-parallax="0.25">
+            <div class="cta-bg-image" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80');"></div>
+            <div class="cta-bg-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="cta-content animate-on-scroll" data-animation="fade-up">
+                <h2 class="cta-title">Ready to Hide a Voice?</h2>
+                <p class="cta-text">The tools are free. The medium is wide open. Record something worth hearing, hide it somewhere worth finding, and give your players a moment they won't forget.</p>
+                <div class="cta-buttons">
+                    <a href="#steps" class="btn btn-primary btn-large">Review Steps</a>
+                    <a href="/#arg-cookbook" target="_top" class="btn btn-secondary btn-large">More Recipes</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         FOOTER
+         ═══════════════════════════════════════════════════════════════════ -->
+    <footer class="recipe-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="/#arg-cookbook" target="_top" class="nav-logo" style="display:flex; align-items:center;">
+                        <img src="/assets/images/arg-cookbook_card.png"
+                            alt="ARG logo"
+                            style="height:1.1em; width:auto; vertical-align:middle; margin-right:0.2em;"
+                        />
+                        <span class="footer-logo">The ARG Cookbook</span>
+                    </a>
+                    <p>A project by <a href="https://nqrlabs.com" target="_blank" rel="noopener">NQR Labs</a></p>
+                </div>
+                <div class="footer-nav">
+                    <a href="/#arg-cookbook" target="_top">All Recipes</a>
+                    <a href="#" data-modal="about">About</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <a href="https://youtube.com/@CLU-NQR" target="_blank">YouTube</a> &middot;
+                <a href="https://discord.gg/HT9YE8rvuN" target="_blank">Discord</a> &middot;
+                <a href="https://nqrlabs.com" target="_blank">NQR Labs</a> &middot;
+                <a href="https://github.com/NQRLabs" target="_blank">GitHub</a>
+                <br>
+                <p>&copy; 2026 NQR. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         MODALS
+         ═══════════════════════════════════════════════════════════════════ -->
+    <div class="modal" id="modal-about">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+            <h2>About This Recipe</h2>
+            <p>This recipe was created by NQR Labs, based on the "Voice on Paper" video. It covers how to use <a href="/#SpectroGhost">SpectroGhost</a> and <a href="/#ReSounder">ReSounder</a> together to create spectrogram ciphers for ARG puzzles.</p>
+            <p>Part of <strong><a href="/#arg-cookbook" target="_top">The ARG Cookbook</a></strong> &mdash; a collection of learning modules for creating immersive alternate reality games.</p>
+        </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+        <div class="progress-fill"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
